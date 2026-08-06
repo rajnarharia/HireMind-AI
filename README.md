@@ -1,86 +1,366 @@
-# HireMind AI 🚀
-[![React](https://img.shields.io/badge/React-18-blue.svg)](https://reactjs.org/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.109-009688.svg)](https://fastapi.tiangolo.com/)
-[![Groq](https://img.shields.io/badge/Groq-LLaMA--3-f54e42.svg)](https://groq.com/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ed.svg)](https://www.docker.com/)
+# 🚀 HireMind AI
 
-**The Enterprise AI Copilot for Technical Hiring.**
+<div align="center">
 
-HireMind AI replaces legacy Applicant Tracking Systems (ATS) with an AI-Native OS. By seamlessly merging Resume Parsing, Adaptive Voice Interviews, IDE-based Coding Assessments, and a Multi-Agent RAG Copilot, HireMind AI reduces Time-to-Hire by 80% while completely eliminating candidate ghosting.
+![HireMind AI](https://img.shields.io/badge/HireMind-AI-orange?style=for-the-badge)
 
-## 🌟 Key Features
+![React](https://img.shields.io/badge/React-19-blue?logo=react)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green?logo=fastapi)
+![Python](https://img.shields.io/badge/Python-3.12-yellow?logo=python)
+![Groq](https://img.shields.io/badge/Groq-LLM-orange)
+![SQLite](https://img.shields.io/badge/SQLite-Database-blue)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.x-38B2AC?logo=tailwindcss)
+![License](https://img.shields.io/badge/License-MIT-success)
 
-*   **Multi-Agent AI Copilot**: A context-aware RAG assistant (powered by Groq & LLaMA 3) that acts as an ATS assistant for recruiters and a Career Coach for candidates.
-*   **AI Resume Analyzer**: Instantly parses uploaded resumes, extracts core skills, and generates an ATS compatibility score.
-*   **Adaptive AI Interviewer**: A dynamic, voice-enabled interview system that adjusts questions based on real-time candidate responses.
-*   **Integrated Coding Platform**: A Monaco-based embedded IDE supporting code execution, hidden test cases, and instant AI code review.
-*   **Skill Gap Analyzer & Hiring Reports**: Automatically compares candidates against job descriptions to generate structured gap analysis and actionable learning roadmaps.
-*   **Enterprise Recruiter Pipeline**: A Kanban-style dashboard for recruiters to manage jobs, applicants, and pipeline velocity.
-*   **Automated Scheduling**: A complete calendar system for booking interviews, handling conflicts, and generating `.ics` files.
+### 🧠 AI-Powered Recruitment Platform
 
-## 🏗️ Architecture
+*Resume Analysis • AI Interviews • Coding Assessment • Learning Roadmaps • Recruiter Dashboard • AI Copilot*
 
-*   **Frontend**: React 18, Vite, Tailwind CSS, Lucide Icons, Framer Motion, React-Big-Calendar, Monaco Editor.
-*   **Backend**: Python, FastAPI, SQLAlchemy, SQLite (production ready for PostgreSQL).
-*   **AI Models**: Groq Cloud (LLaMA-3 70B, LLaMA-3 8B).
-*   **Deployment**: Fully Dockerized with `docker-compose`.
+</div>
 
-## 🚀 Quick Start (Demo Mode)
+---
 
-We have provided a zero-configuration Demo Mode for hackathon judges, investors, and testers.
+# 📌 Overview
 
-1.  **Clone & Start**:
-    ```bash
-    git clone https://github.com/yourusername/hiremind-ai.git
-    cd hiremind-ai
-    docker-compose up --build -d
-    ```
+**HireMind AI** is a modern AI-powered recruitment platform that helps candidates prepare for jobs while enabling recruiters to evaluate applicants efficiently.
 
-2.  **Seed the Demo Database**:
-    ```bash
-    docker exec -it hiremind-ai-backend-1 python seed.py
-    ```
+The platform combines **Artificial Intelligence**, **Resume Analysis**, **Mock Interviews**, **Coding Assessments**, **Learning Roadmaps**, and **Analytics** into one intelligent hiring ecosystem.
 
-3.  **Access the Platform**:
-    *   Navigate to: `http://localhost:5173`
-    *   **Recruiter Account**: `recruiter@demo.com` / `demo123`
-    *   **Candidate Account**: `candidate@demo.com` / `demo123`
+---
 
-## 📂 Folder Structure
+# ✨ Features
 
-```
-hiremind-ai/
-├── backend/                  # FastAPI Application
-│   ├── app/                  # Application Logic
-│   │   ├── api/              # API Route Handlers
-│   │   ├── services/         # Core Business & AI Logic (RAG, etc)
-│   │   ├── models.py         # SQLAlchemy Database Models
-│   │   ├── schemas.py        # Pydantic Validation Schemas
-│   │   └── main.py           # Entrypoint
-│   ├── Dockerfile
-│   └── requirements.txt
-├── frontend/                 # React Application
+## 👨‍💻 Candidate Module
+
+- ✅ AI Resume Analyzer
+- ✅ ATS Score Calculation
+- ✅ Resume Feedback
+- ✅ AI Mock Interview
+- ✅ Speech Recognition
+- ✅ AI Voice Responses
+- ✅ Coding Assessment
+- ✅ Personalized Learning Roadmap
+- ✅ AI Career Copilot
+- ✅ Performance Dashboard
+- ✅ Progress Tracking
+
+---
+
+## 🏢 Recruiter Module
+
+- Candidate Dashboard
+- Recruiter Dashboard
+- Candidate Pipeline
+- AI Hiring Reports
+- Interview Scheduling
+- Analytics Dashboard
+- Candidate Evaluation
+- Resume Screening
+- Notification System
+
+---
+
+## 🤖 AI Features
+
+- Groq LLM Integration
+- Resume Parsing
+- AI Resume Suggestions
+- AI Interview Questions
+- AI Interview Evaluation
+- AI Learning Recommendations
+- AI Career Guidance
+- AI Coding Review
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- React.js
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Recharts
+- React Router
+- Axios
+
+---
+
+## Backend
+
+- FastAPI
+- Python
+- SQLAlchemy
+- Pydantic
+- JWT Authentication
+
+---
+
+## Database
+
+- SQLite
+- PostgreSQL (Production Ready)
+
+---
+
+## AI
+
+- Groq API
+- Large Language Models (LLMs)
+
+---
+
+## Tools
+
+- Git
+- GitHub
+- Docker
+- VS Code
+- Postman
+
+---
+
+# 📂 Project Structure
+
+```bash
+HireMind-AI/
+│
+├── backend/
+│   ├── app/
+│   ├── api/
+│   ├── models/
+│   ├── services/
+│   ├── schemas/
+│   └── main.py
+│
+├── frontend/
 │   ├── src/
-│   │   ├── components/       # Reusable UI & Layouts
-│   │   ├── context/          # React Context (Auth, Theme)
-│   │   ├── pages/            # Page Views (Dashboards, Copilot, Scheduling)
-│   │   ├── services/         # API Client (Axios)
-│   │   └── App.jsx           # Routing
-│   ├── Dockerfile
-│   └── package.json
-└── docker-compose.yml
+│   ├── components/
+│   ├── pages/
+│   ├── layouts/
+│   ├── assets/
+│   └── App.jsx
+│
+├── screenshots/
+├── README.md
+└── requirements.txt
 ```
 
-## 🔒 Security & Roles
+---
 
-HireMind AI implements strict Role-Based Access Control (RBAC).
-*   **Candidates** only have access to their personal resumes, interviews, scores, and candidate-focused AI Copilot.
-*   **Recruiters** have access to job creation, the applicant pipeline, scheduling tools, and the ATS-focused AI Copilot. The system strictly isolates RAG contexts.
+# ⚙ Installation
 
-## 📈 Project Metrics
-- **9 Specialized AI Agents** coordinating via RAG.
-- **100% Automated Workflow** from Apply to Hire.
-- **Sub-second Inference** powered by Groq.
+## Clone Repository
 
-## 📜 License
+```bash
+git clone https://github.com/rajnarharia/HireMind-AI.git
+
+cd HireMind-AI
+```
+
+---
+
+## Backend Setup
+
+```bash
+cd backend
+
+python -m venv venv
+
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate
+
+pip install -r requirements.txt
+
+uvicorn app.main:app --reload
+```
+
+---
+
+## Frontend Setup
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
+```
+
+---
+
+# 🔑 Environment Variables
+
+Create a `.env` file inside the backend folder.
+
+```env
+GROQ_API_KEY=YOUR_GROQ_API_KEY
+
+JWT_SECRET_KEY=YOUR_SECRET_KEY
+
+DATABASE_URL=sqlite:///./hiremind.db
+```
+
+---
+
+# 📊 Modules
+
+### 📄 Resume Analyzer
+
+- Upload Resume
+- ATS Score
+- AI Suggestions
+- Resume Summary
+- Skill Extraction
+
+---
+
+### 🎤 AI Interview
+
+- AI Questions
+- Voice Interview
+- Speech Recognition
+- AI Evaluation
+- Confidence Score
+
+---
+
+### 💻 Coding Platform
+
+- Python Support
+- Code Runner
+- Test Cases
+- Hidden Test Cases
+- AI Code Review
+
+---
+
+### 📈 Dashboard
+
+- Resume Match
+- Coding Score
+- Interview Score
+- AI Readiness
+- Performance Analytics
+
+---
+
+### 🤖 AI Copilot
+
+- Career Guidance
+- Resume Tips
+- Coding Help
+- Interview Tips
+- Learning Suggestions
+
+---
+
+# 📷 Screenshots
+
+Add screenshots here.
+
+```
+screenshots/
+
+dashboard.png
+
+resume.png
+
+interview.png
+
+coding.png
+
+reports.png
+
+copilot.png
+```
+
+---
+
+# 🚀 Future Improvements
+
+- Video Interview
+- AI Facial Emotion Analysis
+- Live Coding Collaboration
+- Company Portal
+- Email Notifications
+- PostgreSQL Migration
+- Docker Deployment
+- Kubernetes Support
+- CI/CD Pipeline
+
+---
+
+# 📈 Roadmap
+
+- [x] Resume Analyzer
+- [x] AI Interview
+- [x] Coding Assessment
+- [x] Learning Roadmap
+- [x] Recruiter Dashboard
+- [x] AI Copilot
+- [ ] Docker Deployment
+- [ ] PostgreSQL
+- [ ] Cloud Deployment
+- [ ] Mobile Application
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+
+2. Create a feature branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit changes
+
+```bash
+git commit -m "Added new feature"
+```
+
+4. Push branch
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
+
+---
+
+# 📜 License
+
 This project is licensed under the MIT License.
+
+---
+
+# 👨‍💻 Author
+
+**Raj Narharia**
+
+🎓 B.Tech Artificial Intelligence
+
+📍 Rajasthan, India
+
+🔗 GitHub
+
+https://github.com/rajnarharia
+
+---
+
+<div align="center">
+
+### ⭐ If you like this project, don't forget to Star the repository ⭐
+
+Made with ❤️ by Raj Narharia
+
+</div>
