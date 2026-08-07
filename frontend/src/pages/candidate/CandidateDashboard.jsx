@@ -131,7 +131,7 @@ function Dashboard() {
           <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Your premium analytics and readiness metrics.</p>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => navigate('/dashboard/resume')} className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-xl text-sm font-bold text-gray-700 dark:text-gray-200 hover:bg-gray-50 shadow-sm transition-all">
+          <button onClick={() => navigate('/dashboard/resume')} className="flex items-center gap-2 px-4 py-2 bg-[var(--surface)] dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-xl text-sm font-bold text-gray-700 dark:text-gray-200 hover:bg-[var(--background)] shadow-sm transition-all">
             <Plus className="w-4 h-4" /> New Analysis
           </button>
         </div>
@@ -183,7 +183,7 @@ function Dashboard() {
         {/* Main Analytics Column */}
         <div className="lg:col-span-2 space-y-6">
           
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-8 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
+          <motion.div variants={itemVariants} className="bg-[var(--surface)] dark:bg-[#111827] rounded-[16px] p-8 border border-gray-200 dark:border-white/5 shadow-sm hover-3d relative overflow-hidden h-full flex flex-col">
             <div className="flex justify-between items-center mb-8 relative z-10">
               <div>
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2"><BarChart3 className="w-5 h-5 text-primary"/> Readiness Distribution</h2>
@@ -191,7 +191,7 @@ function Dashboard() {
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center flex-1">
               <div className="h-64 relative">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -231,79 +231,30 @@ function Dashboard() {
                 </div>
               </div>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {doughnutData.filter(d => d.name !== 'No Data').map((stat, i) => (
-                  <div key={i} className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 dark:hover:bg-white/5 transition-colors cursor-default" onMouseEnter={() => setActivePieIndex(i)} onMouseLeave={() => setActivePieIndex(null)}>
+                  <div key={i} className="flex items-center justify-between p-3.5 rounded-xl border border-gray-100 dark:border-white/10 bg-gray-50 dark:bg-white/5 hover:bg-white dark:hover:bg-white/10 hover:shadow-md hover:border-gray-200 dark:hover:border-white/20 transition-all cursor-default group" onMouseEnter={() => setActivePieIndex(i)} onMouseLeave={() => setActivePieIndex(null)}>
                     <div className="flex items-center gap-3">
                       <div className="w-3 h-3 rounded-full" style={{ backgroundColor: stat.color }}></div>
-                      <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{stat.name}</span>
+                      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{stat.name}</span>
                     </div>
-                    <span className="text-sm font-bold text-gray-900 dark:text-white">{stat.value}%</span>
+                    <span className="text-sm font-black text-gray-900 dark:text-white group-hover:scale-110 transition-transform">{stat.value}%</span>
                   </div>
                 ))}
               </div>
             </div>
           </motion.div>
 
-          {/* Skills Horizontal Bars & Weekly Progress */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
-            <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full">
-              <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Skill Proficiency</h2>
-              <div className="space-y-5 flex-1 flex flex-col justify-center">
-                {data?.charts?.skills?.map((skill, i) => (
-                  <div key={i}>
-                    <div className="flex justify-between text-xs font-bold mb-2">
-                      <span className="text-gray-700 dark:text-gray-300">{skill.subject}</span>
-                      <span className="text-gray-500">{skill.A}%</span>
-                    </div>
-                    <div className="w-full h-2 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
-                      <motion.div 
-                        initial={{ width: 0 }} 
-                        animate={{ width: `${skill.A}%` }} 
-                        transition={{ duration: 1.2, delay: i * 0.1, ease: "easeOut" }}
-                        className="h-full bg-gradient-to-r from-primary to-accent rounded-full shadow-sm"
-                      />
-                    </div>
-                  </div>
-                ))}
-                {(!data?.charts?.skills || data.charts.skills.length === 0) && (
-                  <div className="text-sm text-gray-500">No skill data available.</div>
-                )}
-              </div>
-            </motion.div>
-
-            <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full justify-between">
-              <div>
-                <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Weekly Progress</h2>
-                <div className="flex items-center justify-center mb-6">
-                  <div className="relative">
-                    <CircularProgress value={data?.roadmap_progress || 0} color="text-primary" size={120} strokeWidth={8} textSize="text-2xl" />
-                  </div>
-                </div>
-              </div>
-              <div className="grid grid-cols-2 gap-4 mt-auto">
-                <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl text-center border border-gray-100 dark:border-white/5 shadow-sm hover-3d">
-                  <div className="text-2xl font-black text-gray-900 dark:text-white">{data?.profile?.xp || 0}</div>
-                  <div className="text-xs font-bold text-gray-500 uppercase">Total XP</div>
-                </div>
-                <div className="bg-orange-50 dark:bg-orange-500/10 p-4 rounded-xl text-center border border-orange-200 dark:border-orange-500/20 shadow-sm hover-3d">
-                  <div className="text-2xl font-black text-orange-600 dark:text-orange-400">{data?.profile?.streak || 0}</div>
-                  <div className="text-xs font-bold text-orange-500 uppercase">Day Streak</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
         </div>
 
-        {/* Right Column (Activity, Copilot, Upcoming) */}
+        {/* Right Column (Copilot, Upcoming) */}
         <div className="flex flex-col gap-6">
           
-          <motion.div variants={itemVariants} className="bg-gradient-to-b from-primary to-secondary rounded-[16px] p-6 text-white shadow-lg shadow-primary/20 relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px] group-hover:bg-white/20 transition-all pointer-events-none"></div>
+          <motion.div variants={itemVariants} className="bg-gradient-to-b from-primary to-secondary rounded-[16px] p-6 text-white shadow-lg shadow-primary/20 relative overflow-hidden hover-3d group">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--surface)]/10 rounded-full blur-[40px] group-hover:bg-[var(--surface)]/20 transition-all pointer-events-none"></div>
             
             <div className="flex items-center gap-3 mb-6">
-              <div className="p-2 bg-white/20 rounded-xl backdrop-blur-sm">
+              <div className="p-2 bg-[var(--surface)]/20 rounded-xl backdrop-blur-sm">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
               <h2 className="text-lg font-bold">Copilot Insights</h2>
@@ -313,52 +264,103 @@ function Dashboard() {
               "Your Python skills are in the top 10% this week. Consider taking a mock interview for Senior Backend roles to unlock more opportunities."
             </p>
             
-            <button onClick={() => navigate('/dashboard/copilot')} className="w-full py-3 bg-white text-primary text-sm font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+            <button onClick={() => navigate('/dashboard/copilot')} className="w-full py-3 bg-[var(--surface)] text-primary text-sm font-bold rounded-xl hover:bg-[var(--background)] transition-colors flex items-center justify-center gap-2">
               <Bot className="w-4 h-4"/> Chat with Copilot
             </button>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
+          <motion.div variants={itemVariants} className="bg-[var(--surface)] dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d">
             <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 flex items-center justify-between">
               <span>Upcoming Events</span>
               <Calendar className="w-4 h-4 text-gray-400" />
             </h2>
-            <div className="text-center py-6 bg-gray-50 dark:bg-white/5 rounded-xl border border-dashed border-gray-200 dark:border-white/10">
+            <div className="text-center py-6 bg-[var(--background)] dark:bg-[var(--surface)]/5 rounded-xl border border-dashed border-gray-200 dark:border-white/10">
               <p className="text-sm font-medium text-gray-500 dark:text-gray-400">No upcoming interviews.</p>
               <button className="mt-3 text-primary text-sm font-bold hover:underline">Schedule one</button>
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex-1 flex flex-col">
-            <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6">Activity Timeline</h2>
-            
-            <div className="space-y-6 relative before:absolute before:inset-0 before:ml-3.5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200 dark:before:bg-white/10">
-              {data?.recent_activity?.filter(a => a.date).sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,4).map((act, i) => (
-                <div key={i} className="relative flex items-start gap-4">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border-2 z-10 bg-white dark:bg-[var(--surface)] ${
-                    act.type.includes('Resume') ? 'border-blue-500 text-blue-500' : 
-                    act.type.includes('Interview') ? 'border-purple-500 text-purple-500' :
-                    act.type.includes('Coding') ? 'border-emerald-500 text-emerald-500' :
-                    'border-orange-500 text-orange-500'
-                  }`}>
-                    {act.type.includes('Resume') ? <FileText className="w-3 h-3" /> : 
-                     act.type.includes('Interview') ? <BrainCircuit className="w-3 h-3" /> : 
-                     act.type.includes('Coding') ? <Code2 className="w-3 h-3" /> : 
-                     <Activity className="w-3 h-3" />}
-                  </div>
-                  <div className="flex-1 min-w-0 pt-1">
-                    <div className="text-sm font-bold text-gray-900 dark:text-white">{act.type}</div>
-                    <div className="text-xs text-gray-500 mt-0.5">{new Date(act.date).toLocaleDateString()} at {new Date(act.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-                  </div>
-                </div>
-              ))}
-              {(!data?.recent_activity || data.recent_activity.filter(a => a.date).length === 0) && (
-                <div className="text-center py-4 text-xs text-gray-500">No recent activity.</div>
-              )}
-            </div>
-          </motion.div>
-
         </div>
+      </div>
+
+      {/* Bottom Section: 3 equal height boxes */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+        
+        <motion.div variants={itemVariants} className="bg-[var(--surface)] dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full">
+          <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Skill Proficiency</h2>
+          <div className="space-y-5 flex-1 flex flex-col justify-center">
+            {data?.charts?.skills?.map((skill, i) => (
+              <div key={i}>
+                <div className="flex justify-between text-xs font-bold mb-2">
+                  <span className="text-gray-700 dark:text-gray-300">{skill.subject}</span>
+                  <span className="text-gray-500">{skill.A}%</span>
+                </div>
+                <div className="w-full h-2 bg-gray-100 dark:bg-[var(--surface)]/5 rounded-full overflow-hidden">
+                  <motion.div 
+                    initial={{ width: 0 }} 
+                    animate={{ width: `${skill.A}%` }} 
+                    transition={{ duration: 1.2, delay: i * 0.1, ease: "easeOut" }}
+                    className="h-full bg-gradient-to-r from-primary to-accent rounded-full shadow-sm"
+                  />
+                </div>
+              </div>
+            ))}
+            {(!data?.charts?.skills || data.charts.skills.length === 0) && (
+              <div className="text-sm text-gray-500">No skill data available.</div>
+            )}
+          </div>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="bg-[var(--surface)] dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full justify-between">
+          <div>
+            <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Weekly Progress</h2>
+            <div className="flex items-center justify-center mb-6">
+              <div className="relative">
+                <CircularProgress value={data?.roadmap_progress || 0} color="text-primary" size={120} strokeWidth={8} textSize="text-2xl" />
+              </div>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4 mt-auto">
+            <div className="bg-[var(--background)] dark:bg-[var(--surface)]/5 p-4 rounded-xl text-center border border-gray-100 dark:border-white/5 shadow-sm hover-3d">
+              <div className="text-2xl font-black text-gray-900 dark:text-white">{data?.profile?.xp || 0}</div>
+              <div className="text-xs font-bold text-gray-500 uppercase">Total XP</div>
+            </div>
+            <div className="bg-orange-50 dark:bg-orange-500/10 p-4 rounded-xl text-center border border-orange-200 dark:border-orange-500/20 shadow-sm hover-3d">
+              <div className="text-2xl font-black text-orange-600 dark:text-orange-400">{data?.profile?.streak || 0}</div>
+              <div className="text-xs font-bold text-orange-500 uppercase">Day Streak</div>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div variants={itemVariants} className="bg-[var(--surface)] dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex-1 flex flex-col h-full">
+          <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Activity Timeline</h2>
+          
+          <div className="space-y-6 relative before:absolute before:inset-0 before:ml-3.5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200 dark:before:bg-[var(--surface)]/10">
+            {data?.recent_activity?.filter(a => a.date).sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,4).map((act, i) => (
+              <div key={i} className="relative flex items-start gap-4">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border-2 z-10 bg-[var(--surface)] dark:bg-[var(--surface)] ${
+                  act.type.includes('Resume') ? 'border-blue-500 text-blue-500' : 
+                  act.type.includes('Interview') ? 'border-purple-500 text-purple-500' :
+                  act.type.includes('Coding') ? 'border-emerald-500 text-emerald-500' :
+                  'border-orange-500 text-orange-500'
+                }`}>
+                  {act.type.includes('Resume') ? <FileText className="w-3 h-3" /> : 
+                   act.type.includes('Interview') ? <BrainCircuit className="w-3 h-3" /> : 
+                   act.type.includes('Coding') ? <Code2 className="w-3 h-3" /> : 
+                   <Activity className="w-3 h-3" />}
+                </div>
+                <div className="flex-1 min-w-0 pt-1">
+                  <div className="text-sm font-bold text-gray-900 dark:text-white">{act.type}</div>
+                  <div className="text-xs text-gray-500 mt-0.5">{new Date(act.date).toLocaleDateString()} at {new Date(act.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+                </div>
+              </div>
+            ))}
+            {(!data?.recent_activity || data.recent_activity.filter(a => a.date).length === 0) && (
+              <div className="text-center py-4 text-xs text-gray-500">No recent activity.</div>
+            )}
+          </div>
+        </motion.div>
+
       </div>
     </motion.div>
   );
@@ -370,8 +372,7 @@ const StatCard = ({ title, value, icon: Icon, color, trend, sparklineData, spark
       hidden: { opacity: 0, scale: 0.95 },
       show: { opacity: 1, scale: 1 }
     }}
-    whileHover={{ y: -4, boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)' }}
-    className={`bg-white dark:bg-[#111827] rounded-[16px] p-5 relative overflow-hidden border ${highlight ? 'border-primary/30 ring-1 ring-primary/10 shadow-sm shadow-primary/5' : 'border-gray-200 dark:border-white/5'} transition-all`}
+    className={`bg-[var(--surface)] dark:bg-[#111827] rounded-[16px] p-5 relative overflow-hidden border ${highlight ? 'border-primary/30 ring-1 ring-primary/10 shadow-sm shadow-primary/5' : 'border-gray-200 dark:border-white/5'} hover-3d flex-1`}
   >
     <div className="flex justify-between items-start mb-4">
       <div>

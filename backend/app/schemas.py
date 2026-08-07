@@ -131,6 +131,7 @@ class CodingSubmissionResponse(BaseModel):
     total_cases: int
     execution_time_ms: float
     memory_kb: float
+    error: Optional[str] = None
     review: Optional[CodingReviewResponse] = None
     created_at: datetime
     class Config:

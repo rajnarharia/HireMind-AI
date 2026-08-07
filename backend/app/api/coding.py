@@ -147,6 +147,7 @@ def submit_code(
         "execution_time_ms": submission.execution_time_ms,
         "memory_kb": submission.memory_kb,
         "created_at": submission.created_at,
+        "error": exec_result.get("error"),
         "review": {
             "id": review.id,
             "score": review.score,
@@ -181,5 +182,6 @@ def run_code(
         "passed_cases": exec_result["passed_cases"],
         "total_cases": exec_result["total_cases"],
         "execution_time_ms": exec_result["execution_time_ms"],
-        "memory_kb": exec_result["memory_kb"]
+        "memory_kb": exec_result["memory_kb"],
+        "error": exec_result.get("error")
     }

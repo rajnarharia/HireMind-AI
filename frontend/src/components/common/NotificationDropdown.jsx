@@ -104,9 +104,9 @@ export default function NotificationDropdown() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-80 sm:w-96 glass-card rounded-2xl shadow-2xl overflow-hidden z-50 border border-gray-200 dark:border-white/10"
+            className="absolute top-full right-0 mt-2 w-64 sm:w-72 bg-white dark:bg-[#111827] rounded-xl shadow-xl overflow-hidden z-50 border border-gray-200 dark:border-white/10"
           >
-            <div className="p-4 border-b border-gray-200 dark:border-white/10 flex justify-between items-center bg-white/50 dark:bg-black/20 backdrop-blur-md">
+            <div className="p-4 border-b border-gray-200 dark:border-white/10 flex justify-between items-center bg-gray-50/50 dark:bg-black/20">
               <h3 className="font-bold text-gray-900 dark:text-white">Notifications</h3>
               {unreadCount > 0 && (
                 <button 
@@ -118,7 +118,7 @@ export default function NotificationDropdown() {
               )}
             </div>
 
-            <div className="max-h-[400px] overflow-y-auto custom-scrollbar bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl">
+            <div className="max-h-[70vh] overflow-y-auto custom-scrollbar bg-white dark:bg-[#111827] pb-2">
               {loading ? (
                 <div className="p-8 text-center text-gray-500">
                   <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mx-auto mb-2"></div>
@@ -149,9 +149,9 @@ export default function NotificationDropdown() {
                               <div className="w-2 h-2 rounded-full bg-transparent mt-1.5 border border-gray-300 dark:border-gray-600"></div>
                             )}
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="text-sm font-bold text-gray-900 dark:text-white truncate">{notif.title}</p>
-                            <p className="text-sm text-gray-500 mt-1 line-clamp-2">{notif.message}</p>
+                          <div className="flex-1 min-w-0 pr-2">
+                            <p className="text-sm font-bold text-gray-900 dark:text-white break-words leading-tight">{notif.title}</p>
+                            <p className="text-xs text-gray-500 mt-1.5 break-words leading-snug">{notif.message}</p>
                             <p className="text-xs text-gray-400 mt-2">
                               {new Date(notif.created_at).toLocaleDateString()} at {new Date(notif.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                             </p>

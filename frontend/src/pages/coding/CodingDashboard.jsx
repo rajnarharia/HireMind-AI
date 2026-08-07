@@ -132,7 +132,8 @@ public class main {
         status: res.data.status,
         passed_cases: res.data.passed_cases,
         total_cases: res.data.total_cases,
-        time: res.data.execution_time_ms
+        time: res.data.execution_time_ms,
+        error: res.data.error
       });
     } catch (err) {
       console.error(err);
@@ -158,7 +159,8 @@ public class main {
         status: res.data.status,
         passed_cases: res.data.passed_cases,
         total_cases: res.data.total_cases,
-        time: res.data.execution_time_ms
+        time: res.data.execution_time_ms,
+        error: res.data.error
       });
       
       if (res.data.review) {
@@ -293,16 +295,9 @@ public class main {
               
               <div className="p-3 border-b border-[#2D2D2D] flex items-center justify-between bg-[#1E1E1E] z-10">
                 <div className="flex gap-2">
-                  <select 
-                    value={language} 
-                    onChange={(e) => setLanguage(e.target.value)}
-                    className="bg-[#2D2D2D] border-none text-gray-300 text-sm rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-primary outline-none"
-                  >
-                    <option value="python">Python</option>
-                    <option value="javascript">JavaScript</option>
-                    <option value="java">Java</option>
-                    <option value="cpp">C++</option>
-                  </select>
+                  <div className="bg-[#2D2D2D] border-none text-gray-300 text-sm rounded-lg px-3 py-1.5 font-medium flex items-center gap-2">
+                    Python
+                  </div>
                 </div>
                 
                 <div className="flex items-center gap-3">

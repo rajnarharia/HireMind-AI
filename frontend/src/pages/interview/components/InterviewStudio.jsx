@@ -183,7 +183,7 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
           <button onClick={() => setHasStarted(true)} className="btn-premium px-8 py-4 rounded-xl font-bold flex items-center gap-2 text-lg transition-all hover:scale-105 shadow-xl shadow-primary/20">
             Start Interview <ArrowRight className="w-5 h-5" />
           </button>
-          <button onClick={onExit} className="bg-white/5 hover:bg-white/10 px-8 py-4 rounded-xl font-bold flex items-center gap-2 text-white transition-colors">
+          <button onClick={onExit} className="bg-gray-200/50 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 px-8 py-4 rounded-xl font-bold flex items-center gap-2 text-gray-700 dark:text-white transition-colors">
             Cancel
           </button>
         </div>
