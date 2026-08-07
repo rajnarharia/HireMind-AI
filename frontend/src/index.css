@@ -11,13 +11,6 @@
   --color-warning: #F59E0B;
   --color-danger: #F43F5E;
   
-  /* Deep Dark Mode Variables */
-  --color-bg-dark: #030305;
-  --color-surface-dark: #0A0B10;
-  --color-border-dark: #1E2028;
-  --color-text-primary-dark: #FFFFFF;
-  --color-text-secondary-dark: #94A3B8;
-  
   --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
 
   --animate-blob: blob 7s infinite;
@@ -26,22 +19,34 @@
 
 @layer base {
   :root, .dark {
-    /* Force Dark Mode Everywhere */
-    --background: var(--color-bg-dark);
-    --foreground: var(--color-text-primary-dark);
-    --surface: var(--color-surface-dark);
-    --border: var(--color-border-dark);
-    --text-muted: var(--color-text-secondary-dark);
+    /* Force Dark Mode Everywhere to match original dashboard aesthetic */
+    --background: #030305;
+    --foreground: #FFFFFF;
+    --surface: rgba(10, 11, 16, 0.75);
+    --border: rgba(30, 32, 40, 0.8);
+    --text-muted: #94A3B8;
+    --btn-gradient-start: #00E5FF;
+    --btn-gradient-end: #7C3AED;
+    --btn-shadow: rgba(0, 229, 255, 0.3);
+    --glass-border: rgba(255, 255, 255, 0.05);
   }
 
   body {
     background-color: var(--background) !important;
+    background-image: var(--bg-image, none);
+    background-attachment: fixed;
     color: var(--foreground) !important;
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
     letter-spacing: -0.01em;
+  }
+
+  body {
+    --bg-image: radial-gradient(circle at 15% 50%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(124, 58, 237, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 50% 100%, rgba(244, 114, 182, 0.05) 0%, transparent 40%);
   }
 
   html {
