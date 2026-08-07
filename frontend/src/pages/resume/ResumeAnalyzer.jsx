@@ -138,16 +138,16 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
         
         {/* Left Sidebar */}
         <div className="space-y-6">
-          <div className="glass-card hover-3d rounded-3xl p-2 flex border border-gray-200 dark:border-white/10 relative overflow-hidden bg-gray-50 dark:bg-black/20">
+          <div className="glass-card rounded-3xl p-2 flex border border-gray-200 dark:border-white/10 relative overflow-hidden bg-gray-50 dark:bg-black/20">
             <button 
               onClick={() => setActiveTab('upload')}
-              className={`flex-1 py-3 text-sm font-bold rounded-2xl transition-all relative z-10 ${activeTab === 'upload' ? 'bg-white dark:bg-[var(--surface)] text-gray-900 dark:text-white shadow-lg' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}
+              className={`flex-1 py-3 text-sm font-bold rounded-2xl transition-all relative z-10 ${activeTab === 'upload' ? 'bg-white dark:bg-[#111827] text-gray-900 dark:text-white shadow-lg' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}
             >
               Upload New
             </button>
             <button 
               onClick={() => setActiveTab('history')}
-              className={`flex-1 py-3 text-sm font-bold rounded-2xl transition-all relative z-10 ${activeTab === 'history' ? 'bg-white dark:bg-[var(--surface)] text-gray-900 dark:text-white shadow-lg' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}
+              className={`flex-1 py-3 text-sm font-bold rounded-2xl transition-all relative z-10 ${activeTab === 'history' ? 'bg-white dark:bg-[#111827] text-gray-900 dark:text-white shadow-lg' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}
             >
               History
             </button>
@@ -158,7 +158,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
               <motion.div 
                 key="upload"
                 initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }}
-                className="glass-card hover-3d rounded-3xl p-6 relative overflow-hidden group"
+                className="glass-card rounded-3xl p-6 relative overflow-hidden group"
               >
                 <div className="absolute top-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-[50px] pointer-events-none group-hover:bg-primary/20 transition-all"></div>
                 <div 
@@ -196,7 +196,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
                 <button
                   onClick={handleAnalyze}
                   disabled={!file || isAnalyzing}
-                  className="w-full mt-6 btn-premium btn-3d py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
+                  className="w-full mt-6 btn-premium py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden"
                 >
                   {isAnalyzing ? (
                     <>
@@ -215,7 +215,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
               <motion.div 
                 key="history"
                 initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: 20 }}
-                className="glass-card hover-3d rounded-3xl p-6"
+                className="glass-card rounded-3xl p-6"
               >
                 <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">Past Uploads</h3>
                 <div className="space-y-3 max-h-[500px] overflow-y-auto custom-scrollbar pr-2">
@@ -262,7 +262,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
             {!result ? (
               <motion.div 
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                className="glass-card hover-3d h-full rounded-3xl flex flex-col items-center justify-center p-12 text-center border-dashed border-2 border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-black/20 min-h-[500px]"
+                className="glass-card h-full rounded-3xl flex flex-col items-center justify-center p-12 text-center border-dashed border-2 border-gray-200 dark:border-white/10 bg-gray-50/50 dark:bg-black/20 min-h-[500px]"
               >
                 <div className="w-24 h-24 rounded-full bg-gray-100 dark:bg-white/5 flex items-center justify-center mb-6 shadow-inner">
                   <BrainCircuit className="w-12 h-12 text-gray-300 dark:text-gray-700" />
@@ -291,7 +291,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
                       a.download = `Resume_Analysis_${result.filename}.txt`;
                       a.click();
                     }}
-                    className="btn-premium btn-3d px-4 py-2 rounded-xl text-sm flex items-center gap-2"
+                    className="btn-premium px-4 py-2 rounded-xl text-sm flex items-center gap-2"
                   >
                     <Download className="w-4 h-4" /> Download Report
                   </button>
@@ -299,7 +299,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
 
                 {/* Score Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="glass-card hover-3d rounded-3xl p-8 flex items-center justify-between relative overflow-hidden group">
+                  <div className="glass-card rounded-3xl p-8 flex items-center justify-between relative overflow-hidden group">
                     <div className="absolute -left-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-emerald-500/20 transition-all"></div>
                     <div>
                       <h3 className="text-gray-500 dark:text-gray-400 font-bold mb-1">ATS Parse Score</h3>
@@ -308,7 +308,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
                     <ScoreRing score={result.analysis?.ats_score || 0} colorClass="text-emerald-500" />
                   </div>
                   
-                  <div className="glass-card hover-3d rounded-3xl p-8 flex items-center justify-between relative overflow-hidden group">
+                  <div className="glass-card rounded-3xl p-8 flex items-center justify-between relative overflow-hidden group">
                     <div className="absolute -right-10 -bottom-10 w-32 h-32 bg-blue-500/10 rounded-full blur-[40px] pointer-events-none group-hover:bg-blue-500/20 transition-all"></div>
                     <div>
                       <h3 className="text-gray-500 dark:text-gray-400 font-bold mb-1">Impact Score</h3>
@@ -319,7 +319,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
                 </div>
 
                 {/* AI Summary */}
-                <div className="glass-card hover-3d rounded-3xl p-8 relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent">
+                <div className="glass-card rounded-3xl p-8 relative overflow-hidden bg-gradient-to-b from-primary/5 to-transparent">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[50px] pointer-events-none"></div>
                   <h3 className="text-xl font-bold mb-4 flex items-center gap-2 text-gray-900 dark:text-white"><Sparkles className="w-5 h-5 text-primary"/> AI Executive Summary</h3>
                   <p className="text-gray-700 dark:text-gray-300 leading-relaxed relative z-10 text-lg">
@@ -329,7 +329,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {/* Strengths */}
-                  <div className="glass-card hover-3d rounded-3xl p-8 border-t-4 border-t-emerald-500">
+                  <div className="glass-card rounded-3xl p-8 border-t-4 border-t-emerald-500">
                     <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white"><TrendingUp className="w-5 h-5 text-emerald-500"/> Key Strengths</h3>
                     <ul className="space-y-4">
                       {(result.analysis?.strengths || []).map((s, i) => (
@@ -345,7 +345,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
                   </div>
 
                   {/* Areas for Improvement */}
-                  <div className="glass-card hover-3d rounded-3xl p-8 border-t-4 border-t-orange-500">
+                  <div className="glass-card rounded-3xl p-8 border-t-4 border-t-orange-500">
                     <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white"><AlertCircle className="w-5 h-5 text-orange-500"/> Areas to Improve</h3>
                     <ul className="space-y-4">
                       {(result.analysis?.weaknesses || []).map((w, i) => (
@@ -364,7 +364,7 @@ function ScoreRing({ score, label, colorClass, size = "lg" }) {
                 </div>
 
                 {/* Skills Analysis */}
-                <div className="glass-card hover-3d rounded-3xl p-8">
+                <div className="glass-card rounded-3xl p-8">
                   <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white"><Target className="w-5 h-5 text-primary"/> Extracted Skills</h3>
                   <div className="flex flex-wrap gap-2">
                     {(result.analysis?.skills || []).map((skill, i) => (

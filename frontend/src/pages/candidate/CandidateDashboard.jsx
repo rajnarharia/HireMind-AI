@@ -13,11 +13,10 @@ import {
 } from 'recharts';
 import { useNavigate } from 'react-router-dom';
 
-const CircularProgress = ({ value, color, size = 56, strokeWidth = 5, textSize = 'text-xs' }) => {
-  const safeValue = Math.round(value || 0);
+const CircularProgress = ({ value, color, size = 56, strokeWidth = 5 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
-  const offset = circumference - (safeValue / 100) * circumference;
+  const offset = circumference - ((value || 0) / 100) * circumference;
 
   return (
     <div style={{ width: size, height: size }} className="relative flex items-center justify-center">
@@ -33,8 +32,8 @@ const CircularProgress = ({ value, color, size = 56, strokeWidth = 5, textSize =
           className={color}
         />
       </svg>
-      <div className={`absolute flex items-center justify-center font-bold text-gray-900 dark:text-white ${textSize}`}>
-        {safeValue}%
+      <div className="absolute flex items-center justify-center text-xs font-bold text-gray-900 dark:text-white">
+        {value || 0}%
       </div>
     </div>
   )
@@ -132,7 +131,7 @@ function Dashboard() {
           <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">Your premium analytics and readiness metrics.</p>
         </div>
         <div className="flex gap-3">
-          <button onClick={() => navigate('/dashboard/resume')} className="btn-premium btn-3d px-6 py-2 rounded-xl text-sm font-bold flex items-center gap-2 shadow-lg shadow-primary/20">
+          <button onClick={() => navigate('/dashboard/resume')} className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-xl text-sm font-bold text-gray-700 dark:text-gray-200 hover:bg-gray-50 shadow-sm transition-all">
             <Plus className="w-4 h-4" /> New Analysis
           </button>
         </div>
@@ -182,9 +181,9 @@ function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Main Analytics Column */}
-        <div className="lg:col-span-2 flex flex-col gap-6">
+        <div className="lg:col-span-2 space-y-6">
           
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-8 border border-gray-200 dark:border-white/5 shadow-sm hover-3d transition-all relative overflow-hidden">
+          <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-8 border border-gray-200 dark:border-white/5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden">
             <div className="flex justify-between items-center mb-8 relative z-10">
               <div>
                 <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2"><BarChart3 className="w-5 h-5 text-primary"/> Readiness Distribution</h2>
@@ -246,20 +245,21 @@ function Dashboard() {
             </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
-            <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full">
+          {/* Skills Horizontal Bars & Weekly Progress */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
               <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Skill Proficiency</h2>
-              <div className="space-y-5 flex-1 flex flex-col justify-center">
+              <div className="space-y-5">
                 {data?.charts?.skills?.map((skill, i) => (
-                  <div key={i} className="w-full">
+                  <div key={i}>
                     <div className="flex justify-between text-xs font-bold mb-2">
                       <span className="text-gray-700 dark:text-gray-300">{skill.subject}</span>
-                      <span className="text-gray-500">{Math.round(skill.A || 0)}%</span>
+                      <span className="text-gray-500">{skill.A}%</span>
                     </div>
                     <div className="w-full h-2 bg-gray-100 dark:bg-white/5 rounded-full overflow-hidden">
                       <motion.div 
                         initial={{ width: 0 }} 
-                        animate={{ width: `${Math.round(skill.A || 0)}%` }} 
+                        animate={{ width: `${skill.A}%` }} 
                         transition={{ duration: 1.2, delay: i * 0.1, ease: "easeOut" }}
                         className="h-full bg-gradient-to-r from-primary to-accent rounded-full shadow-sm"
                       />
@@ -272,21 +272,21 @@ function Dashboard() {
               </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full justify-between">
+            <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm flex flex-col justify-between">
               <div>
                 <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Weekly Progress</h2>
                 <div className="flex items-center justify-center mb-6">
                   <div className="relative">
-                    <CircularProgress value={data?.roadmap_progress || 0} color="text-primary" size={120} strokeWidth={8} textSize="text-2xl" />
+                    <CircularProgress value={data?.roadmap_progress || 0} color="text-primary" size={120} strokeWidth={8} />
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4 mt-auto">
-                <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl text-center border border-gray-100 dark:border-white/5 shadow-sm hover-3d">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl text-center">
                   <div className="text-2xl font-black text-gray-900 dark:text-white">{data?.profile?.xp || 0}</div>
                   <div className="text-xs font-bold text-gray-500 uppercase">Total XP</div>
                 </div>
-                <div className="bg-orange-50 dark:bg-orange-500/10 p-4 rounded-xl text-center border border-orange-200 dark:border-orange-500/20 shadow-sm hover-3d">
+                <div className="bg-orange-50 dark:bg-orange-500/10 p-4 rounded-xl text-center border border-orange-100 dark:border-orange-500/20">
                   <div className="text-2xl font-black text-orange-600 dark:text-orange-400">{data?.profile?.streak || 0}</div>
                   <div className="text-xs font-bold text-orange-500 uppercase">Day Streak</div>
                 </div>
@@ -297,7 +297,7 @@ function Dashboard() {
         </div>
 
         {/* Right Column (Activity, Copilot, Upcoming) */}
-        <div className="flex flex-col gap-6">
+        <div className="space-y-6">
           
           <motion.div variants={itemVariants} className="bg-gradient-to-b from-primary to-secondary rounded-[16px] p-6 text-white shadow-lg shadow-primary/20 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px] group-hover:bg-white/20 transition-all pointer-events-none"></div>
@@ -320,7 +320,7 @@ function Dashboard() {
             </button>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
+          <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
             <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 flex items-center justify-between">
               <span>Upcoming Events</span>
               <Calendar className="w-4 h-4 text-gray-400" />
@@ -332,13 +332,13 @@ function Dashboard() {
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex-1 flex flex-col">
+          <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
             <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6">Activity Timeline</h2>
             
-            <div className="space-y-6 relative before:absolute before:inset-0 before:ml-3.5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200 dark:before:bg-white/10">
+            <div className="space-y-6 relative before:absolute before:inset-0 before:ml-3.5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-100 dark:before:bg-white/10">
               {data?.recent_activity?.filter(a => a.date).sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,4).map((act, i) => (
                 <div key={i} className="relative flex items-start gap-4">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border-2 z-10 bg-white dark:bg-[var(--surface)] ${
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border-2 z-10 bg-white dark:bg-[#111827] ${
                     act.type.includes('Resume') ? 'border-blue-500 text-blue-500' : 
                     act.type.includes('Interview') ? 'border-purple-500 text-purple-500' :
                     act.type.includes('Coding') ? 'border-emerald-500 text-emerald-500' :
@@ -373,7 +373,8 @@ const StatCard = ({ title, value, icon: Icon, color, trend, sparklineData, spark
       hidden: { opacity: 0, scale: 0.95 },
       show: { opacity: 1, scale: 1 }
     }}
-    className={`bg-white dark:bg-[var(--surface)] hover-3d rounded-[16px] p-5 relative overflow-hidden border ${highlight ? 'border-primary/30 ring-1 ring-primary/10 shadow-sm shadow-primary/5' : 'border-gray-200 dark:border-white/5'} transition-all`}
+    whileHover={{ y: -4, boxShadow: '0 10px 25px -5px rgba(0,0,0,0.05)' }}
+    className={`bg-white dark:bg-[#111827] rounded-[16px] p-5 relative overflow-hidden border ${highlight ? 'border-primary/30 ring-1 ring-primary/10 shadow-sm shadow-primary/5' : 'border-gray-200 dark:border-white/5'} transition-all`}
   >
     <div className="flex justify-between items-start mb-4">
       <div>

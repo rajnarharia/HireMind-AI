@@ -128,7 +128,7 @@ function RecruiterScheduling() {
         <div className="relative z-10 flex items-center gap-6">
           <button 
             onClick={() => navigate(-1)} 
-            className="p-3 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm"
+            className="p-3 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm"
           >
             <ChevronLeft className="w-6 h-6 text-gray-500" />
           </button>
@@ -146,7 +146,7 @@ function RecruiterScheduling() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         {/* Calendar Column */}
-        <div className="lg:col-span-2 glass-card hover-3d rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[var(--surface)] shadow-xl relative overflow-hidden group">
+        <div className="lg:col-span-2 glass-card rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[#111827] shadow-xl relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px] pointer-events-none transition-all group-hover:bg-primary/10"></div>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><CalendarIcon className="w-5 h-5 text-primary"/> Your Availability</h2>
           
@@ -166,7 +166,7 @@ function RecruiterScheduling() {
         </div>
 
         {/* Form Column */}
-        <div className="glass-card hover-3d rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[var(--surface)] shadow-xl relative overflow-hidden h-fit sticky top-24">
+        <div className="glass-card rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[#111827] shadow-xl relative overflow-hidden h-fit sticky top-24">
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white"><Video className="w-5 h-5 text-primary"/> New Invitation</h2>
           
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -213,7 +213,7 @@ function RecruiterScheduling() {
               <textarea className="input-premium w-full px-4 py-3 rounded-xl text-sm resize-none h-24" value={formData.notes} onChange={e => setFormData({...formData, notes: e.target.value})} placeholder="Optional notes or instructions..." />
             </div>
 
-            <button type="submit" disabled={loading || !formData.start_time} className="w-full btn-premium btn-3d py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg disabled:opacity-50">
+            <button type="submit" disabled={loading || !formData.start_time} className="w-full btn-premium py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg disabled:opacity-50">
               {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
               Send Invitation
             </button>

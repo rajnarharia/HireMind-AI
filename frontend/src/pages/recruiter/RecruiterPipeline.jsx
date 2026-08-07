@@ -68,7 +68,7 @@ function RecruiterPipeline() {
         <div className="relative z-10 flex items-center gap-6">
           <button 
             onClick={() => navigate('/recruiter')} 
-            className="p-3 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm"
+            className="p-3 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm"
           >
             <ChevronLeft className="w-6 h-6 text-gray-500" />
           </button>
@@ -85,7 +85,7 @@ function RecruiterPipeline() {
         <div className="relative z-10 flex gap-3 w-full md:w-auto">
           <button 
             onClick={() => setShowFilters(!showFilters)}
-            className={`flex-1 md:flex-none px-4 py-2.5 border font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-colors ${showFilters ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-white dark:bg-[var(--surface)] border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5'}`}
+            className={`flex-1 md:flex-none px-4 py-2.5 border font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-colors ${showFilters ? 'bg-primary text-white border-primary shadow-lg shadow-primary/20' : 'bg-white dark:bg-[#111827] border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/5'}`}
           >
             <Filter className="w-4 h-4" /> Filter
           </button>
@@ -98,14 +98,14 @@ function RecruiterPipeline() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="glass-card hover-3d p-4 rounded-2xl flex flex-col md:flex-row gap-4 shrink-0"
+            className="glass-card p-4 rounded-2xl flex flex-col md:flex-row gap-4 shrink-0"
           >
             <div className="flex-1">
               <label className="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Search Name</label>
               <input 
                 type="text" 
                 placeholder="e.g. John Doe"
-                className="w-full input-premium px-4 py-2 rounded-xl text-sm bg-white dark:bg-[var(--surface)]"
+                className="w-full input-premium px-4 py-2 rounded-xl text-sm bg-white dark:bg-[#111827]"
                 value={filterText}
                 onChange={(e) => setFilterText(e.target.value)}
               />
@@ -156,7 +156,7 @@ function RecruiterPipeline() {
                     {col === 'Rejected' && <ShieldAlert className="w-4 h-4 text-red-500" />}
                     {col}
                   </h3>
-                  <span className="px-2.5 py-0.5 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 rounded-lg text-xs font-black shadow-sm text-gray-500">
+                  <span className="px-2.5 py-0.5 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-lg text-xs font-black shadow-sm text-gray-500">
                     {colCandidates.length}
                   </span>
                 </div>
@@ -174,7 +174,7 @@ function RecruiterPipeline() {
                         draggable
                         onDragStart={(e) => e.dataTransfer.setData("appId", c.application.id)}
                         onClick={() => navigate(`/recruiter/candidate/${c.application.id}`)}
-                        className="glass-card hover-3d p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[var(--surface)] cursor-pointer hover:border-primary/50 hover:shadow-lg transition-all group relative overflow-hidden"
+                        className="glass-card p-5 rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-[#111827] cursor-pointer hover:border-primary/50 hover:shadow-lg transition-all group relative overflow-hidden"
                       >
                         <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-[30px] pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity"></div>
                         

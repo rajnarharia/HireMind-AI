@@ -147,7 +147,6 @@ def submit_code(
         "execution_time_ms": submission.execution_time_ms,
         "memory_kb": submission.memory_kb,
         "created_at": submission.created_at,
-        "first_failed": exec_result.get("first_failed"),
         "review": {
             "id": review.id,
             "score": review.score,
@@ -161,21 +160,26 @@ def submit_code(
         }
     }
 
-@router.post("/run")
+@router.post("/question/{question_id}/run")
 def run_code(
+    question_id: int,
     request: schemas.CodingSubmitRequest,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user)
 ):
-    from ..services.coding_service import execute_run_code
-    
-    # Run code against execution engine without test cases
-    exec_result = execute_run_code(request.language, request.code)
+    question = db.query(models.CodingQuestion).filter(models.CodingQuestion.id == question_id).first()
+    if not question:
+        raise HTTPException(status_code=404, detail="Question not found")
+
+    visible_cases = json.loads(question.visible_test_cases)
+
+    # Run code against piston API with ONLY visible test cases
+    exec_result = execute_code(request.language, request.code, visible_cases)
 
     return {
-        "stdout": exec_result["stdout"],
-        "stderr": exec_result["stderr"],
-        "runtime": exec_result["runtime"],
-        "memory": exec_result["memory"],
-        "success": exec_result["success"]
+        "status": exec_result["status"],
+        "passed_cases": exec_result["passed_cases"],
+        "total_cases": exec_result["total_cases"],
+        "execution_time_ms": exec_result["execution_time_ms"],
+        "memory_kb": exec_result["memory_kb"]
     }

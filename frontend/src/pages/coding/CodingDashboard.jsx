@@ -21,17 +21,11 @@ function CodingDashboard() {
   
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [startingResumeId, setStartingResumeId] = useState(null);
   const [code, setCode] = useState("// Write your code here...");
   const [language, setLanguage] = useState("python");
-  
-  // Separate states for Run and Submit
-  const [runOutput, setRunOutput] = useState(null);
-  const [submitOutput, setSubmitOutput] = useState(null);
+  const [output, setOutput] = useState(null);
   const [review, setReview] = useState(null);
-  
-  // Active Tab: 'output', 'errors', 'testcases', 'review'
-  const [activeTab, setActiveTab] = useState('output');
+  const [showReview, setShowReview] = useState(false);
 
 
   async function fetchData() {
@@ -46,7 +40,7 @@ function CodingDashboard() {
   }
 
   async function startRound(resumeId) {
-    setStartingResumeId(resumeId);
+    setIsProcessing(true);
     try {
       const res = await api.post('/coding/start', {
         resume_id: resumeId,
@@ -110,14 +104,12 @@ public class main {
 }`
       };
       setCode(defaultCode[language] || "// Write your code here...\n\n");
-      setRunOutput(null);
-      setSubmitOutput(null);
+      setOutput(null);
       setReview(null);
-      setActiveTab('output');
     } catch (err) {
       console.error(err);
     } finally {
-      setStartingResumeId(null);
+      setIsProcessing(false);
     }
   }
 
@@ -125,26 +117,25 @@ public class main {
     if (!activeRound || activeRound.questions.length === 0) return;
     
     setIsProcessing(true);
-    setRunOutput(null);
-    setSubmitOutput(null);
+    setOutput(null);
     setReview(null);
-    
+    setShowReview(false);
     try {
-      const res = await api.post(`/coding/run`, {
+      const questionId = activeRound.questions[0].id;
+      const res = await api.post(`/coding/question/${questionId}/run`, {
         language: LANGUAGE_MAP[language] || "python",
         code: code
       });
       
-      setRunOutput(res.data);
-      if (res.data.success) {
-        setActiveTab('output');
-      } else {
-        setActiveTab('errors');
-      }
+      setOutput({
+        status: res.data.status,
+        passed_cases: res.data.passed_cases,
+        total_cases: res.data.total_cases,
+        time: res.data.execution_time_ms
+      });
     } catch (err) {
       console.error(err);
-      setRunOutput({ success: false, stdout: "", stderr: "Execution failed or timed out.", runtime: "0ms", memory: "0MB" });
-      setActiveTab('errors');
+      setOutput({ status: "error", error: "Execution failed or timed out." });
     } finally {
       setIsProcessing(false);
     }
@@ -154,9 +145,7 @@ public class main {
     if (!activeRound || activeRound.questions.length === 0) return;
     
     setIsProcessing(true);
-    setRunOutput(null);
-    setSubmitOutput(null);
-    
+    setOutput(null);
     try {
       const questionId = activeRound.questions[0].id;
       const res = await api.post(`/coding/question/${questionId}/submit`, {
@@ -164,22 +153,20 @@ public class main {
         code: code
       });
       
-      setSubmitOutput({
+      setOutput({
         status: res.data.status,
         passed_cases: res.data.passed_cases,
         total_cases: res.data.total_cases,
-        time: res.data.execution_time_ms,
-        first_failed: res.data.first_failed
+        time: res.data.execution_time_ms
       });
       
       if (res.data.review) {
         setReview(res.data.review);
+        setShowReview(true);
       }
-      setActiveTab('testcases');
     } catch (err) {
       console.error(err);
-      setSubmitOutput({ status: "error", error: "Submit failed." });
-      setActiveTab('testcases');
+      setOutput({ status: "error", error: "Execution failed or timed out." });
     } finally {
       setIsProcessing(false);
     }
@@ -220,7 +207,7 @@ public class main {
             </div>
           </div>
 
-          <div className="glass-card hover-3d rounded-3xl p-8 relative overflow-hidden group max-w-3xl">
+          <div className="glass-card rounded-3xl p-8 relative overflow-hidden group max-w-3xl">
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-[50px] pointer-events-none group-hover:bg-emerald-500/20 transition-all"></div>
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><Play className="w-5 h-5 text-emerald-500"/> Start New Challenge</h2>
             
@@ -244,10 +231,10 @@ public class main {
                     </div>
                     <button
                       onClick={() => startRound(resume.id)}
-                      disabled={startingResumeId !== null}
-                      className="btn-premium btn-3d px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 disabled:opacity-50"
+                      disabled={isProcessing}
+                      className="btn-premium px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 disabled:opacity-50"
                     >
-                      {startingResumeId === resume.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4 fill-current" />} Start
+                      {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4 fill-current" />} Start
                     </button>
                   </div>
                 ))
@@ -260,7 +247,7 @@ public class main {
           
           {/* Left Panel - Question & Test Cases */}
           <div className="w-1/3 flex flex-col gap-6 min-w-[350px]">
-            <div className="flex-1 glass-card hover-3d rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 bg-white/50 dark:bg-[#0A0D14]/80 flex flex-col relative shadow-2xl">
+            <div className="flex-1 glass-card rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 bg-white/50 dark:bg-[#0A0D14]/80 flex flex-col relative shadow-2xl">
               <div className="p-4 border-b border-gray-200 dark:border-white/5 flex items-center justify-between bg-white/50 dark:bg-black/20 backdrop-blur-md z-10">
                 <h3 className="font-bold flex items-center gap-2 text-gray-900 dark:text-white">
                   <Code2 className="w-5 h-5 text-primary" /> Problem Description
@@ -301,7 +288,7 @@ public class main {
           {/* Right Panel - IDE & Output */}
           <div className="flex-1 flex flex-col gap-6">
             
-            <div className="flex-1 glass-card hover-3d rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 bg-[#1E1E1E] flex flex-col shadow-2xl relative">
+            <div className="flex-1 glass-card rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 bg-[#1E1E1E] flex flex-col shadow-2xl relative">
               
               <div className="p-3 border-b border-[#2D2D2D] flex items-center justify-between bg-[#1E1E1E] z-10">
                 <div className="flex gap-2">
@@ -311,6 +298,9 @@ public class main {
                     className="bg-[#2D2D2D] border-none text-gray-300 text-sm rounded-lg px-3 py-1.5 focus:ring-1 focus:ring-primary outline-none"
                   >
                     <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="cpp">C++</option>
                   </select>
                 </div>
                 
@@ -318,7 +308,7 @@ public class main {
                   <button onClick={() => runCode()} disabled={isProcessing} className="px-4 py-1.5 rounded-lg text-sm font-bold flex items-center gap-2 bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20 transition-colors">
                     <Play className="w-4 h-4" /> Run
                   </button>
-                  <button onClick={() => submitCode()} disabled={isProcessing} className="btn-premium btn-3d px-5 py-1.5 rounded-lg text-sm font-bold flex items-center gap-2">
+                  <button onClick={() => submitCode()} disabled={isProcessing} className="btn-premium px-5 py-1.5 rounded-lg text-sm font-bold flex items-center gap-2">
                     {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4 fill-current" />} Submit Code
                   </button>
                 </div>
@@ -348,83 +338,46 @@ public class main {
 
             {/* Output Panel */}
             <AnimatePresence>
-              {(runOutput || submitOutput || isProcessing || review) && (
+              {(output || isProcessing || review) && (
                 <motion.div 
                   initial={{ opacity: 0, height: 0 }} 
-                  animate={{ opacity: 1, height: '280px' }} 
+                  animate={{ opacity: 1, height: '240px' }} 
                   exit={{ opacity: 0, height: 0 }}
-                  className="glass-card hover-3d rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 bg-white/50 dark:bg-[#0A0D14]/80 flex flex-col shadow-2xl"
+                  className="glass-card rounded-3xl overflow-hidden border border-gray-200 dark:border-white/5 bg-white/50 dark:bg-[#0A0D14]/80 flex flex-col shadow-2xl"
                 >
                   <div className="p-3 border-b border-gray-200 dark:border-white/5 flex items-center justify-between bg-white/50 dark:bg-black/20">
                     <div className="flex gap-4">
-                      <button onClick={() => setActiveTab('output')} className={`text-sm font-bold px-3 py-1 rounded-lg transition-colors ${activeTab === 'output' ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>Output</button>
-                      <button onClick={() => setActiveTab('errors')} className={`text-sm font-bold px-3 py-1 rounded-lg transition-colors ${activeTab === 'errors' ? 'bg-white dark:bg-white/10 text-red-500' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>Errors</button>
-                      <button onClick={() => setActiveTab('testcases')} className={`text-sm font-bold px-3 py-1 rounded-lg transition-colors ${activeTab === 'testcases' ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>Test Cases</button>
-                      
-                      {review && <button onClick={() => setActiveTab('review')} className={`text-sm font-bold px-3 py-1 rounded-lg transition-colors flex items-center gap-2 ${activeTab === 'review' ? 'bg-primary/10 text-primary' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
+                      <button onClick={() => setShowReview(false)} className={`text-sm font-bold px-3 py-1 rounded-lg transition-colors ${!showReview ? 'bg-white dark:bg-white/10 text-gray-900 dark:text-white' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>Execution</button>
+                      {review && <button onClick={() => setShowReview(true)} className={`text-sm font-bold px-3 py-1 rounded-lg transition-colors flex items-center gap-2 ${showReview ? 'bg-primary/10 text-primary' : 'text-gray-500 hover:text-gray-900 dark:hover:text-white'}`}>
                         <Sparkles className="w-3.5 h-3.5" /> AI Review
                       </button>}
                     </div>
                   </div>
                   
                   <div className="flex-1 overflow-y-auto p-4 custom-scrollbar font-mono text-sm">
-                    {isProcessing && !runOutput && !submitOutput ? (
+                    {isProcessing && !output ? (
                       <div className="flex items-center gap-3 text-gray-500 h-full justify-center">
-                        <Loader2 className="w-5 h-5 animate-spin" /> Executing on remote cluster...
+                        <Loader2 className="w-5 h-5 animate-spin" /> Evaluating submission on remote cluster...
                       </div>
-                    ) : activeTab === 'output' && runOutput ? (
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2 mb-2">
-                          {runOutput.success ? <CheckCircle className="w-5 h-5 text-emerald-500" /> : <AlertCircle className="w-5 h-5 text-red-500" />}
-                          <span className={`font-bold ${runOutput.success ? 'text-emerald-500' : 'text-red-500'}`}>
-                            {runOutput.success ? 'Execution Successful' : 'Execution Failed'}
-                          </span>
-                        </div>
-                        {runOutput.stdout ? (
-                          <div className="bg-gray-100 dark:bg-black/40 text-gray-900 dark:text-gray-300 p-3 rounded-xl whitespace-pre-wrap">{runOutput.stdout}</div>
-                        ) : (
-                          <div className="text-gray-500 italic">No output</div>
-                        )}
-                        <div className="flex gap-8 text-gray-500 text-xs mt-2">
-                           <p>Runtime: <span className="font-bold text-gray-900 dark:text-white">{runOutput.runtime}</span></p>
-                           <p>Memory: <span className="font-bold text-gray-900 dark:text-white">{runOutput.memory}</span></p>
-                        </div>
-                      </div>
-                    ) : activeTab === 'errors' && runOutput ? (
-                      <div className="space-y-3">
-                        {runOutput.stderr ? (
-                          <div className="bg-red-500/10 text-red-500 p-3 rounded-xl whitespace-pre-wrap">{runOutput.stderr}</div>
-                        ) : (
-                          <div className="text-gray-500 italic">No errors</div>
-                        )}
-                      </div>
-                    ) : activeTab === 'testcases' && submitOutput ? (
+                    ) : !showReview && output ? (
                       <div className="space-y-3">
                         <div className="flex items-center gap-2">
-                          {submitOutput.status === 'passed' ? <CheckCircle className="w-5 h-5 text-emerald-500" /> : submitOutput.status === 'error' ? <AlertCircle className="w-5 h-5 text-red-500" /> : <AlertCircle className="w-5 h-5 text-orange-500" />}
-                          <span className={`font-bold ${submitOutput.status === 'passed' ? 'text-emerald-500' : submitOutput.status === 'error' ? 'text-red-500' : 'text-orange-500'}`}>
-                            {submitOutput.status === 'passed' ? 'Accepted' : submitOutput.status === 'error' ? 'Execution Error' : 'Wrong Answer'}
+                          {output.status === 'passed' ? <CheckCircle className="w-5 h-5 text-emerald-500" /> : output.status === 'error' ? <AlertCircle className="w-5 h-5 text-red-500" /> : <AlertCircle className="w-5 h-5 text-orange-500" />}
+                          <span className={`font-bold ${output.status === 'passed' ? 'text-emerald-500' : 'text-red-500'}`}>
+                            {output.status === 'passed' ? 'Accepted' : output.status === 'error' ? 'Execution Error' : 'Wrong Answer'}
                           </span>
                         </div>
-                        {submitOutput.status !== 'error' && (
+                        {output.status !== 'error' && (
                           <div className="flex gap-8 text-gray-500 text-xs">
-                            <p>Test Cases: <span className="font-bold text-gray-900 dark:text-white">{submitOutput.passed_cases} / {submitOutput.total_cases}</span> passed</p>
-                            <p>Time: <span className="font-bold text-gray-900 dark:text-white">{submitOutput.time}ms</span></p>
+                            <p>Test Cases: <span className="font-bold text-gray-900 dark:text-white">{output.passed_cases} / {output.total_cases}</span> passed</p>
+                            <p>Time: <span className="font-bold text-gray-900 dark:text-white">{output.time}ms</span></p>
                           </div>
                         )}
-                        {submitOutput.first_failed && (
-                          <div className="mt-4 border border-red-500/20 bg-red-500/5 p-4 rounded-xl space-y-2">
-                            <h4 className="text-red-500 font-bold text-xs uppercase tracking-wider mb-2">Failed Test Case Details</h4>
-                            <div><span className="text-gray-500">Input:</span> <span className="text-gray-900 dark:text-gray-300 ml-2 font-mono">{submitOutput.first_failed.input}</span></div>
-                            <div><span className="text-gray-500">Expected:</span> <span className="text-emerald-500 ml-2 font-mono">{submitOutput.first_failed.expected}</span></div>
-                            <div><span className="text-gray-500">Your Output:</span> <span className="text-red-500 ml-2 font-mono">{submitOutput.first_failed.actual}</span></div>
-                          </div>
-                        )}
-                        {submitOutput.error && (
-                          <div className="bg-red-500/10 text-red-500 p-3 rounded-xl whitespace-pre-wrap">{submitOutput.error}</div>
+                        {output.error && (
+                          <div className="bg-red-500/10 text-red-500 p-3 rounded-xl whitespace-pre-wrap">{output.error}</div>
                         )}
                       </div>
-                    ) : activeTab === 'review' && review ? (
+                    ) : showReview && review ? (
                       <div className="prose prose-sm dark:prose-invert font-sans text-gray-700 dark:text-gray-300 max-w-none bg-primary/5 p-4 rounded-xl border border-primary/20 relative">
                         <div className="absolute top-0 right-0 p-4">
                           <span className="text-xs font-black text-primary bg-primary/10 px-2 py-1 rounded-lg">Score: {review.score}/100</span>
@@ -433,11 +386,11 @@ public class main {
                         <p className="text-sm mb-4">{review.correctness}</p>
                         
                         <div className="grid grid-cols-2 gap-4 mb-4">
-                          <div className="bg-white dark:bg-[var(--surface)] p-3 rounded-lg border border-gray-200 dark:border-white/5">
+                          <div className="bg-white dark:bg-[#111827] p-3 rounded-lg border border-gray-200 dark:border-white/5">
                             <span className="text-xs text-gray-500 font-bold uppercase block mb-1">Time</span>
                             <span className="text-sm font-mono text-primary">{review.time_complexity}</span>
                           </div>
-                          <div className="bg-white dark:bg-[var(--surface)] p-3 rounded-lg border border-gray-200 dark:border-white/5">
+                          <div className="bg-white dark:bg-[#111827] p-3 rounded-lg border border-gray-200 dark:border-white/5">
                             <span className="text-xs text-gray-500 font-bold uppercase block mb-1">Space</span>
                             <span className="text-sm font-mono text-primary">{review.space_complexity}</span>
                           </div>
@@ -461,9 +414,7 @@ public class main {
                           </>
                         )}
                       </div>
-                    ) : (
-                       <div className="text-gray-500 italic flex items-center justify-center h-full">No output available for this tab. Execute code to see results.</div>
-                    )}
+                    ) : null}
                   </div>
                 </motion.div>
               )}

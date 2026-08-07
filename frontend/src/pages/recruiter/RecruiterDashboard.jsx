@@ -145,7 +145,7 @@ function RecruiterDashboard() {
         </div>
         <button 
           onClick={() => navigate('/recruiter/jobs/new')}
-          className="relative z-10 btn-premium btn-3d px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
+          className="relative z-10 btn-premium px-6 py-3 rounded-xl flex items-center gap-2 shadow-lg hover:scale-105 transition-transform"
         >
           <Plus className="w-5 h-5" /> Post New Job
         </button>
@@ -162,7 +162,7 @@ function RecruiterDashboard() {
       {/* Analytics Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Pipeline Funnel */}
-        <motion.div variants={itemVariants} className="glass-card hover-3d rounded-3xl p-6 relative overflow-hidden group">
+        <motion.div variants={itemVariants} className="glass-card rounded-3xl p-6 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] pointer-events-none"></div>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><Target className="w-5 h-5 text-primary"/> Hiring Pipeline Funnel</h2>
           <div className="h-[300px] w-full">
@@ -183,7 +183,7 @@ function RecruiterDashboard() {
         </motion.div>
 
         {/* Candidate Sources */}
-        <motion.div variants={itemVariants} className="glass-card hover-3d rounded-3xl p-6 relative overflow-hidden group">
+        <motion.div variants={itemVariants} className="glass-card rounded-3xl p-6 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-[40px] pointer-events-none"></div>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><Users className="w-5 h-5 text-emerald-500"/> Candidate Sources</h2>
           <div className="h-[300px] w-full flex items-center justify-center">
@@ -210,7 +210,7 @@ function RecruiterDashboard() {
         </motion.div>
 
         {/* Applications Over Time */}
-        <motion.div variants={itemVariants} className="glass-card hover-3d rounded-3xl p-6 relative overflow-hidden group lg:col-span-2">
+        <motion.div variants={itemVariants} className="glass-card rounded-3xl p-6 relative overflow-hidden group lg:col-span-2">
           <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-[40px] pointer-events-none"></div>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><TrendingUp className="w-5 h-5 text-purple-500"/> Activity Trends</h2>
           <div className="h-[300px] w-full">
@@ -237,23 +237,23 @@ function RecruiterDashboard() {
             <h2 className="text-xl font-bold flex items-center gap-2 text-gray-900 dark:text-white"><Briefcase className="w-5 h-5 text-primary"/> Active Roles</h2>
             <div className="relative">
               <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-              <input type="text" placeholder="Search roles..." className="pl-9 pr-4 py-2 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none text-gray-900 dark:text-white" />
+              <input type="text" placeholder="Search roles..." className="pl-9 pr-4 py-2 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-lg text-sm focus:ring-2 focus:ring-primary outline-none text-gray-900 dark:text-white" />
             </div>
           </div>
 
           <div className="space-y-4">
             {jobs.length === 0 ? (
-              <motion.div variants={itemVariants} className="glass-card hover-3d rounded-3xl p-12 text-center border-dashed border-2 border-gray-200 dark:border-white/10">
+              <motion.div variants={itemVariants} className="glass-card rounded-3xl p-12 text-center border-dashed border-2 border-gray-200 dark:border-white/10">
                 <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">No active jobs</h3>
                 <p className="text-gray-500 mb-6 max-w-sm mx-auto">Create your first job posting to start building your AI-powered talent pipeline.</p>
-                <button onClick={() => navigate('/recruiter/jobs/new')} className="btn-premium btn-3d px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 mx-auto">
+                <button onClick={() => navigate('/recruiter/jobs/new')} className="btn-premium px-6 py-2.5 rounded-xl font-bold flex items-center gap-2 mx-auto">
                   <Plus className="w-4 h-4" /> Create Job Posting
                 </button>
               </motion.div>
             ) : (
               jobs.map(job => (
-                <motion.div key={job.id} variants={itemVariants} className="glass-card hover-3d rounded-2xl p-6 group hover:shadow-xl transition-all relative overflow-hidden">
+                <motion.div key={job.id} variants={itemVariants} className="glass-card rounded-2xl p-6 group hover:shadow-xl transition-all relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] pointer-events-none"></div>
                   
                   <div className="flex justify-between items-start mb-4 relative z-10">
@@ -302,9 +302,9 @@ function RecruiterDashboard() {
                       <p className="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Skills Req</p>
                       <div className="flex gap-1 overflow-hidden">
                         {(job.required_skills || []).slice(0, 2).map((s, i) => (
-                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 dark:bg-[var(--surface)] rounded text-gray-600 dark:text-gray-300 truncate max-w-[80px] border border-gray-200 dark:border-white/5">{s}</span>
+                          <span key={i} className="text-xs px-2 py-1 bg-gray-100 dark:bg-[#111827] rounded text-gray-600 dark:text-gray-300 truncate max-w-[80px] border border-gray-200 dark:border-white/5">{s}</span>
                         ))}
-                        {(job.required_skills?.length > 2) && <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-[var(--surface)] rounded text-gray-500 border border-gray-200 dark:border-white/5">+{job.required_skills.length - 2}</span>}
+                        {(job.required_skills?.length > 2) && <span className="text-xs px-2 py-1 bg-gray-100 dark:bg-[#111827] rounded text-gray-500 border border-gray-200 dark:border-white/5">+{job.required_skills.length - 2}</span>}
                       </div>
                     </div>
                   </div>
@@ -320,7 +320,7 @@ function RecruiterDashboard() {
             <h2 className="text-xl font-bold flex items-center gap-2 text-gray-900 dark:text-white"><Activity className="w-5 h-5 text-primary"/> Activity</h2>
           </div>
           
-          <motion.div variants={itemVariants} className="glass-card hover-3d rounded-3xl p-6 relative overflow-hidden">
+          <motion.div variants={itemVariants} className="glass-card rounded-3xl p-6 relative overflow-hidden">
              <div className="absolute bottom-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px] pointer-events-none"></div>
              
              <div className="space-y-6 relative before:absolute before:inset-0 before:ml-4 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 dark:before:via-white/10 before:to-transparent">
@@ -329,7 +329,7 @@ function RecruiterDashboard() {
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-500/10 border-2 border-blue-500 text-blue-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                   <Users className="w-4 h-4" />
                 </div>
-                <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] glass-card hover-3d p-4 rounded-xl md:group-odd:text-right border-gray-100 dark:border-white/5">
+                <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] glass-card p-4 rounded-xl md:group-odd:text-right border-gray-100 dark:border-white/5">
                   <div className="font-bold text-gray-900 dark:text-white text-sm">New Applicant</div>
                   <div className="text-xs text-gray-500 mt-1">Jane Doe applied for Frontend Engineer</div>
                 </div>
@@ -338,7 +338,7 @@ function RecruiterDashboard() {
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-500/10 border-2 border-emerald-500 text-emerald-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                   <Calendar className="w-4 h-4" />
                 </div>
-                <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] glass-card hover-3d p-4 rounded-xl md:group-odd:text-right border-gray-100 dark:border-white/5">
+                <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] glass-card p-4 rounded-xl md:group-odd:text-right border-gray-100 dark:border-white/5">
                   <div className="font-bold text-gray-900 dark:text-white text-sm">Interview Scheduled</div>
                   <div className="text-xs text-gray-500 mt-1">Tech screen w/ John Smith at 2pm</div>
                 </div>
@@ -347,7 +347,7 @@ function RecruiterDashboard() {
                 <div className="flex items-center justify-center w-8 h-8 rounded-full bg-purple-500/10 border-2 border-purple-500 text-purple-500 shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 z-10">
                   <UserCheck className="w-4 h-4" />
                 </div>
-                <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] glass-card hover-3d p-4 rounded-xl md:group-odd:text-right border-gray-100 dark:border-white/5">
+                <div className="w-[calc(100%-3rem)] md:w-[calc(50%-2rem)] glass-card p-4 rounded-xl md:group-odd:text-right border-gray-100 dark:border-white/5">
                   <div className="font-bold text-gray-900 dark:text-white text-sm">AI Evaluation Complete</div>
                   <div className="text-xs text-gray-500 mt-1">Report ready for Senior Backend Dev</div>
                 </div>
@@ -369,9 +369,9 @@ function RecruiterDashboard() {
             
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white dark:bg-[var(--surface)] w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative z-10 custom-scrollbar border border-gray-200 dark:border-white/10"
+              className="glass-card w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-3xl shadow-2xl relative z-10 custom-scrollbar border border-gray-200 dark:border-white/10"
             >
-              <div className="sticky top-0 bg-white/80 dark:bg-[var(--surface)]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 px-8 py-5 flex justify-between items-center z-20">
+              <div className="sticky top-0 bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl border-b border-gray-200 dark:border-white/5 px-8 py-5 flex justify-between items-center z-20">
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Edit Job Posting</h2>
                 <button onClick={() => setEditingJob(null)} className="p-2 hover:bg-gray-100 dark:hover:bg-white/5 rounded-full transition-colors text-gray-500">
                   <X className="w-6 h-6" />
@@ -430,7 +430,7 @@ function RecruiterDashboard() {
                   <button onClick={() => setEditingJob(null)} className="px-6 py-3 rounded-xl font-bold text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 transition-colors">
                     Cancel
                   </button>
-                  <button onClick={() => saveEdit(editingJob)} disabled={saving} className="btn-premium btn-3d px-8 py-3 rounded-xl flex items-center gap-2">
+                  <button onClick={() => saveEdit(editingJob)} disabled={saving} className="btn-premium px-8 py-3 rounded-xl flex items-center gap-2">
                     {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <><Save className="w-5 h-5" /> Save Changes</>}
                   </button>
                 </div>
@@ -449,7 +449,7 @@ const StatCard = ({ title, value, icon: Icon, color, bg, trend, highlight }) => 
       hidden: { opacity: 0, scale: 0.95 },
       show: { opacity: 1, scale: 1 }
     }}
-    className={`glass-card hover-3d rounded-3xl p-6 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl ${highlight ? 'border-primary/30 ring-1 ring-primary/20' : ''}`}
+    className={`glass-card rounded-3xl p-6 relative overflow-hidden group transition-all duration-300 hover:shadow-2xl ${highlight ? 'border-primary/30 ring-1 ring-primary/20' : ''}`}
   >
     <div className={`absolute -right-6 -top-6 w-24 h-24 rounded-full ${bg} blur-2xl group-hover:blur-3xl transition-all`}></div>
     <div className="flex items-start justify-between mb-4 relative z-10">

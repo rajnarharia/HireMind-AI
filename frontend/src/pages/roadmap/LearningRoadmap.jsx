@@ -111,7 +111,7 @@ function LearningRoadmap() {
         </div>
         <h1 className="text-3xl md:text-4xl font-black text-gray-900 dark:text-white tracking-tight">No Roadmap Found</h1>
         <p className="text-gray-500 font-medium text-lg max-w-xl mx-auto">Complete a Resume Analysis, Interview, Coding Round, and generate a Hiring Report to unlock your personalized AI Learning Roadmap.</p>
-        <button onClick={() => navigate('/dashboard/report')} className="btn-premium btn-3d px-8 py-4 rounded-xl shadow-lg mt-8 inline-flex items-center gap-2 font-bold hover:scale-105 transition-transform">
+        <button onClick={() => navigate('/dashboard/report')} className="btn-premium px-8 py-4 rounded-xl shadow-lg mt-8 inline-flex items-center gap-2 font-bold hover:scale-105 transition-transform">
           <Target className="w-5 h-5" /> Generate Hiring Report First
         </button>
       </motion.div>
@@ -135,14 +135,14 @@ function LearningRoadmap() {
           <p className="text-gray-500 dark:text-gray-400 font-medium mt-2 max-w-xl">Your custom roadmap built to address specific skill gaps identified in your assessments.</p>
           <button 
             onClick={downloadPDF}
-            className="mt-4 btn-premium btn-3d px-4 py-2 rounded-xl font-bold flex items-center gap-2 text-sm shadow-lg"
+            className="mt-4 btn-premium px-4 py-2 rounded-xl font-bold flex items-center gap-2 text-sm shadow-lg"
           >
             <Download className="w-4 h-4" /> Export PDF
           </button>
         </div>
 
         <div className="relative z-10 w-full md:w-auto flex flex-col md:items-end">
-          <div className="glass-card hover-3d px-6 py-4 rounded-2xl flex items-center gap-4 bg-white/50 dark:bg-black/20 border-primary/20 shadow-xl w-full md:w-auto">
+          <div className="glass-card px-6 py-4 rounded-2xl flex items-center gap-4 bg-white/50 dark:bg-black/20 border-primary/20 shadow-xl w-full md:w-auto">
             <div className="text-left md:text-right">
               <p className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-1">Overall Progress</p>
               <div className="flex items-center gap-3">
@@ -169,14 +169,14 @@ function LearningRoadmap() {
         {/* Left Sidebar - Timeline */}
         <div className="lg:col-span-1 space-y-4 relative">
           <div className="sticky top-24 space-y-4">
-            <div className="glass-card hover-3d rounded-2xl p-4 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/5">
+            <div className="glass-card rounded-2xl p-4 bg-gray-50 dark:bg-black/20 border border-gray-200 dark:border-white/5">
               <h3 className="text-sm font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2 uppercase tracking-wider"><Navigation className="w-4 h-4 text-primary" /> Journey Map</h3>
               <div className="space-y-2 relative before:absolute before:inset-0 before:ml-[15px] before:-translate-x-px md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-gray-200 dark:before:via-white/10 before:to-transparent">
                 {activeMap.weeks.map((week, idx) => (
                   <button 
                     key={week.id}
                     onClick={() => setExpandedWeek(expandedWeek === week.id ? null : week.id)}
-                    className={`w-full relative flex items-center gap-3 p-3 rounded-xl transition-all z-10 ${expandedWeek === week.id ? 'bg-white dark:bg-[var(--surface)] shadow-md border border-gray-200 dark:border-white/10' : 'hover:bg-white/50 dark:hover:bg-white/5'}`}
+                    className={`w-full relative flex items-center gap-3 p-3 rounded-xl transition-all z-10 ${expandedWeek === week.id ? 'bg-white dark:bg-[#111827] shadow-md border border-gray-200 dark:border-white/10' : 'hover:bg-white/50 dark:hover:bg-white/5'}`}
                   >
                     <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border-2 ${week.progress === 100 ? 'bg-emerald-500 border-emerald-500 text-white' : expandedWeek === week.id ? 'bg-white dark:bg-black border-primary text-primary' : 'bg-white dark:bg-black border-gray-300 dark:border-gray-700 text-gray-400'}`}>
                       {week.progress === 100 ? <CheckCircle2 className="w-4 h-4" /> : <span className="text-xs font-bold">{idx + 1}</span>}
@@ -216,10 +216,10 @@ function LearningRoadmap() {
                       <motion.div 
                         key={task.id} 
                         layout
-                        className={`glass-card hover-3d rounded-2xl p-5 border transition-all ${
+                        className={`glass-card rounded-2xl p-5 border transition-all ${
                           task.is_completed 
                             ? 'bg-emerald-500/5 border-emerald-500/20 shadow-sm' 
-                            : 'bg-white/50 dark:bg-[var(--surface)]/80 border-gray-200 dark:border-white/5 hover:border-primary/30 hover:shadow-lg'
+                            : 'bg-white/50 dark:bg-[#111827]/80 border-gray-200 dark:border-white/5 hover:border-primary/30 hover:shadow-lg'
                         }`}
                       >
                         <div className="flex flex-col sm:flex-row sm:items-start gap-4">

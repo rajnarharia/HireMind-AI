@@ -187,7 +187,7 @@ function HiringReportDashboard() {
             </button>
             <button 
               onClick={downloadPDF}
-              className="btn-premium btn-3d px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 text-sm shadow-lg"
+              className="btn-premium px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 text-sm shadow-lg"
             >
               <Download className="w-4 h-4" /> Export PDF
             </button>
@@ -247,7 +247,7 @@ function HiringReportDashboard() {
             {/* Radar Chart */}
             <div className="space-y-6">
               <h3 className="text-lg font-bold flex items-center gap-2 text-gray-900 dark:text-white"><BarChart className="w-5 h-5 text-primary"/> Competency Radar</h3>
-              <div className="h-64 bg-gray-50 dark:bg-[var(--surface)] rounded-3xl border border-gray-100 dark:border-white/5 p-4">
+              <div className="h-64 bg-gray-50 dark:bg-[#111827] rounded-3xl border border-gray-100 dark:border-white/5 p-4">
                 <ResponsiveContainer width="100%" height="100%">
                   <RadarChart cx="50%" cy="50%" outerRadius="70%" data={radarData}>
                     <PolarGrid stroke="rgba(255,255,255,0.1)" />
@@ -265,7 +265,7 @@ function HiringReportDashboard() {
           <div className="pt-8 relative z-10 border-t border-gray-200 dark:border-white/10">
             <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white"><Zap className="w-5 h-5 text-orange-500"/> Skill Proficiency vs Requirement</h3>
             
-            <div className="h-80 bg-gray-50 dark:bg-[var(--surface)] rounded-3xl border border-gray-100 dark:border-white/5 p-6">
+            <div className="h-80 bg-gray-50 dark:bg-[#111827] rounded-3xl border border-gray-100 dark:border-white/5 p-6">
               {barData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%">
                   <RechartsBar data={barData} margin={{ top: 20, right: 30, left: 0, bottom: 5 }}>
@@ -291,7 +291,7 @@ function HiringReportDashboard() {
             <h3 className="text-lg font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white"><ShieldCheck className="w-5 h-5 text-primary"/> AI Recommendations</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="glass-card hover-3d bg-emerald-500/5 border-emerald-500/20 rounded-3xl p-6">
+              <div className="glass-card bg-emerald-500/5 border-emerald-500/20 rounded-3xl p-6">
                 <h4 className="font-bold text-emerald-600 dark:text-emerald-400 mb-4 flex items-center gap-2"><CheckCircle className="w-5 h-5" /> Strengths</h4>
                 <ul className="space-y-3">
                   {(activeReport.strengths || []).map((s, i) => (
@@ -301,7 +301,7 @@ function HiringReportDashboard() {
                   ))}
                 </ul>
               </div>
-              <div className="glass-card hover-3d bg-orange-500/5 border-orange-500/20 rounded-3xl p-6">
+              <div className="glass-card bg-orange-500/5 border-orange-500/20 rounded-3xl p-6">
                 <h4 className="font-bold text-orange-600 dark:text-orange-400 mb-4 flex items-center gap-2"><AlertTriangle className="w-5 h-5" /> Development Areas</h4>
                 <ul className="space-y-3">
                   {(activeReport.weaknesses || []).map((w, i) => (
@@ -340,7 +340,7 @@ function HiringReportDashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         
         {/* Generator Form */}
-        <div className="glass-card hover-3d rounded-3xl p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-3xl p-8 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px] pointer-events-none group-hover:bg-primary/20 transition-all"></div>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><Zap className="w-5 h-5 text-primary"/> Generate New Report</h2>
           
@@ -348,7 +348,7 @@ function HiringReportDashboard() {
             <div>
               <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-2">Select Candidate Resume</label>
               {resumes.length === 0 ? (
-                <div className="p-4 bg-gray-50 dark:bg-[var(--surface)] rounded-xl border border-dashed border-gray-200 dark:border-white/10 text-sm text-gray-500">
+                <div className="p-4 bg-gray-50 dark:bg-[#111827] rounded-xl border border-dashed border-gray-200 dark:border-white/10 text-sm text-gray-500">
                   No resumes found. Please upload one first.
                 </div>
               ) : (
@@ -360,7 +360,7 @@ function HiringReportDashboard() {
                       className={`p-4 rounded-xl border cursor-pointer transition-all flex items-center gap-3 ${
                         selectedResume === r.id 
                           ? 'bg-primary/10 border-primary shadow-sm' 
-                          : 'bg-white dark:bg-[var(--surface)] border-gray-200 dark:border-white/10 hover:border-primary/50'
+                          : 'bg-white dark:bg-[#111827] border-gray-200 dark:border-white/10 hover:border-primary/50'
                       }`}
                     >
                       <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${selectedResume === r.id ? 'bg-primary text-white' : 'bg-gray-100 dark:bg-white/5 text-gray-400'}`}>
@@ -398,7 +398,7 @@ function HiringReportDashboard() {
             <button
               onClick={generateReport}
               disabled={!selectedResume || !jdText.trim() || isProcessing}
-              className="w-full btn-premium btn-3d py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold"
+              className="w-full btn-premium py-4 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm font-bold"
             >
               {isProcessing ? <Loader2 className="w-5 h-5 animate-spin" /> : <BarChart className="w-5 h-5" />}
               {isProcessing ? 'Generating AI Report...' : 'Generate Comprehensive Report'}
@@ -407,13 +407,13 @@ function HiringReportDashboard() {
         </div>
 
         {/* History List */}
-        <div className="glass-card hover-3d rounded-3xl p-8 relative overflow-hidden group">
+        <div className="glass-card rounded-3xl p-8 relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-[50px] pointer-events-none group-hover:bg-emerald-500/10 transition-all"></div>
           <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><FileText className="w-5 h-5 text-emerald-500"/> Report Archive</h2>
           
           <div className="space-y-3 max-h-[600px] overflow-y-auto custom-scrollbar pr-2 relative z-10">
             {reports.length === 0 ? (
-              <div className="text-center p-8 bg-gray-50 dark:bg-[var(--surface)] rounded-2xl border border-dashed border-gray-200 dark:border-white/10">
+              <div className="text-center p-8 bg-gray-50 dark:bg-[#111827] rounded-2xl border border-dashed border-gray-200 dark:border-white/10">
                 <FileText className="w-10 h-10 text-gray-400 mx-auto mb-3" />
                 <p className="text-sm text-gray-500 font-medium">No reports generated yet.</p>
               </div>
@@ -422,7 +422,7 @@ function HiringReportDashboard() {
                 <div 
                   key={report.id}
                   onClick={() => loadReport(report.id)}
-                  className="p-5 rounded-2xl bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 flex items-center justify-between group/item hover:border-primary/50 hover:bg-gray-50 dark:hover:bg-white/5 transition-all cursor-pointer shadow-sm hover:shadow-md"
+                  className="p-5 rounded-2xl bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 flex items-center justify-between group/item hover:border-primary/50 hover:bg-gray-50 dark:hover:bg-white/5 transition-all cursor-pointer shadow-sm hover:shadow-md"
                 >
                   <div className="flex items-center gap-4 min-w-0">
                     <div className="w-12 h-12 rounded-xl bg-gray-100 dark:bg-white/5 text-gray-500 flex items-center justify-center shrink-0">

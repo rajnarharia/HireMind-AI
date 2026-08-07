@@ -44,7 +44,7 @@ function RecruiterCreateJob() {
         <div className="relative z-10 flex items-center gap-6">
           <button 
             onClick={() => navigate('/recruiter')} 
-            className="p-3 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm"
+            className="p-3 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm"
           >
             <ChevronLeft className="w-6 h-6 text-gray-500" />
           </button>
@@ -60,7 +60,7 @@ function RecruiterCreateJob() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit} className="glass-card hover-3d rounded-3xl p-8 md:p-10 space-y-8 relative overflow-hidden group">
+      <form onSubmit={handleSubmit} className="glass-card rounded-3xl p-8 md:p-10 space-y-8 relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px] pointer-events-none transition-all group-hover:bg-primary/10"></div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
@@ -163,7 +163,7 @@ function RecruiterCreateJob() {
           <button type="button" onClick={() => navigate('/recruiter')} className="px-8 py-3.5 bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-700 dark:text-gray-300 font-bold rounded-xl transition-colors">
             Cancel
           </button>
-          <button type="submit" disabled={loading} className="btn-premium btn-3d px-10 py-3.5 rounded-xl font-bold shadow-lg flex items-center gap-2 disabled:opacity-50">
+          <button type="submit" disabled={loading} className="btn-premium px-10 py-3.5 rounded-xl font-bold shadow-lg flex items-center gap-2 disabled:opacity-50">
             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
             {loading ? 'Publishing...' : 'Publish Job'}
           </button>

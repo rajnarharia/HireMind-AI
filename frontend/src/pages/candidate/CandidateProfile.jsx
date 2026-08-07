@@ -105,7 +105,7 @@ function CandidateProfile() {
       </div>
 
       {/* Main Form */}
-      <div className="glass-card hover-3d rounded-3xl p-8 md:p-10 relative overflow-hidden group">
+      <div className="glass-card rounded-3xl p-8 md:p-10 relative overflow-hidden group">
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[50px] pointer-events-none transition-all group-hover:bg-primary/10"></div>
         
         <div className="mb-8 relative z-10">
@@ -192,7 +192,7 @@ function CandidateProfile() {
             <button
               type="submit"
               disabled={saving}
-              className="btn-premium btn-3d px-8 py-3.5 rounded-xl font-bold flex items-center gap-2 disabled:opacity-50"
+              className="btn-premium px-8 py-3.5 rounded-xl font-bold flex items-center gap-2 disabled:opacity-50"
             >
               {saving ? <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div> : <Save className="w-5 h-5" />}
               Save Profile

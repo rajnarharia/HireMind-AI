@@ -90,7 +90,7 @@ function LandingPage() {
             <motion.div 
               key={i}
               whileHover={{ y: -5 }}
-              className="glass-card hover-3d p-8 rounded-3xl group"
+              className="glass-card p-8 rounded-3xl group"
             >
               <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
                 <feature.icon className="w-6 h-6 text-primary" />

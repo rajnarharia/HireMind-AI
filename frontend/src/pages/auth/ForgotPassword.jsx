@@ -23,7 +23,7 @@ function ForgotPassword() {
         transition={{ duration: 0.4 }}
         className="w-full max-w-[440px] relative z-10"
       >
-        <div className="glass-card hover-3d rounded-[2rem] p-10 backdrop-blur-2xl border border-white/20 dark:border-white/5 shadow-2xl text-center">
+        <div className="glass-card rounded-[2rem] p-10 backdrop-blur-2xl border border-white/20 dark:border-white/5 shadow-2xl text-center">
           
           <div className="inline-flex items-center gap-2 mb-8">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg">
