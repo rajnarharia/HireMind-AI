@@ -1,98 +1,392 @@
-# HireMind AI 🚀
+<div align="center">
 
-HireMind AI is an advanced, AI-powered recruitment and interview platform designed to seamlessly connect candidates with next-generation hiring processes. The platform features an interactive Candidate Dashboard, an AI-driven Interview Studio, and a real-time Coding Environment with automated code reviews.
+# 🚀 HireMind AI
+### AI-Powered Recruitment & Interview Intelligence Platform
 
-## 🌟 Key Features
+<p align="center">
+An end-to-end AI recruitment platform that helps candidates prepare for interviews and enables recruiters to streamline hiring through intelligent automation.
+</p>
 
-- **Candidate Dashboard:** A sleek, premium dashboard featuring dynamic 3D hover animations, readiness distribution charts, and upcoming interview event tracking.
-- **AI-Powered Coding Rounds:** A fully integrated coding environment where candidates can write and execute code. Submissions are instantly evaluated by our AI engine (powered by Groq) for correctness, time/space complexity, and code quality.
-- **Interview Studio:** An intelligent, simulated interview experience where candidates receive personalized technical questions based on their resume and job profile.
-- **Modern UI/UX:** Built with a sophisticated light-gray design language, featuring glassmorphism effects, smooth transitions (via Framer Motion), and responsive layouts.
+<p align="center">
 
-## 🛠️ Tech Stack
+![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens)
+![Groq AI](https://img.shields.io/badge/Groq-AI-orange?style=for-the-badge)
 
-### Frontend
-- **Framework:** React + Vite
-- **Styling:** Tailwind CSS (v4)
-- **Animations:** Framer Motion
-- **Icons:** Lucide React
-- **HTTP Client:** Axios
+</p>
 
-### Backend
-- **Framework:** FastAPI (Python)
-- **Database:** SQLite (managed via SQLAlchemy ORM)
-- **Validation:** Pydantic
-- **Server:** Uvicorn
-- **AI Integration:** Groq API (for automated code review & interview intelligence)
+---
 
-## 🚀 Getting Started
+### 🌐 Repository
 
-### Prerequisites
-- Node.js (v18+)
-- Python (3.10+)
+**GitHub:**  
+https://github.com/rajnarharia/HireMind-AI
 
-### 1. Backend Setup
+---
 
-Navigate to the backend directory and install the dependencies:
+</div>
+
+# 📌 Overview
+
+HireMind AI is a modern AI-powered recruitment platform that combines candidate assessment, resume intelligence, coding evaluations, AI mock interviews, recruiter analytics, and hiring automation into one unified application.
+
+The platform provides an end-to-end hiring workflow for both recruiters and candidates using Generative AI and modern web technologies.
+
+---
+
+# ✨ Features
+
+## 👨‍💼 Candidate Portal
+
+- AI Resume Analyzer
+- ATS Compatibility Checker
+- Resume Score
+- AI Executive Summary
+- Skill Gap Detection
+- Learning Roadmap Generator
+- AI Mock Interview
+- Coding Assessment
+- AI Career Copilot
+- Reports Dashboard
+- Performance Analytics
+- Interview Scheduling
+- Candidate Profile Management
+
+---
+
+## 🏢 Recruiter Portal
+
+- Recruiter Dashboard
+- Candidate Pipeline
+- Resume Screening
+- Interview Scheduling
+- Candidate Analytics
+- Hiring Reports
+- AI Candidate Ranking
+- Job Description Matching
+- Notifications
+- Search & Filtering
+
+---
+
+## 🤖 AI Features
+
+- Resume Parsing
+- Resume Scoring
+- ATS Score
+- AI Recommendations
+- Learning Roadmap Generation
+- Interview Question Generation
+- AI Copilot
+- Candidate Evaluation
+- AI Hiring Reports
+
+---
+
+# 🖥️ Tech Stack
+
+## Frontend
+
+- React.js
+- Vite
+- JavaScript (ES6+)
+- Tailwind CSS
+- Framer Motion
+- Recharts
+- Axios
+- React Router
+
+---
+
+## Backend
+
+- FastAPI
+- Python
+- SQLAlchemy
+- JWT Authentication
+- Pydantic
+- Uvicorn
+
+---
+
+## AI
+
+- Groq API
+- LLM Integration
+- Prompt Engineering
+- Resume Analysis
+- AI Interview Engine
+
+---
+
+## Database
+
+- SQLite
+- SQLAlchemy ORM
+
+---
+
+# 📂 Project Structure
+
+```text
+HireMind-AI
+│
+├── backend
+│   ├── app
+│   │   ├── api
+│   │   ├── models
+│   │   ├── services
+│   │   ├── schemas
+│   │   ├── core
+│   │   └── main.py
+│   │
+│   └── requirements.txt
+│
+├── frontend
+│   ├── src
+│   │   ├── components
+│   │   ├── pages
+│   │   ├── hooks
+│   │   ├── layouts
+│   │   ├── services
+│   │   └── App.jsx
+│   │
+│   └── package.json
+│
+├── uploads
+├── docker-compose.yml
+├── README.md
+└── LICENSE
+```
+
+---
+
+# 🚀 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/rajnarharia/HireMind-AI.git
+
+cd HireMind-AI
+```
+
+---
+
+# ⚙️ Backend Setup
+
 ```bash
 cd backend
+
 python -m venv venv
-# On Windows
+
 venv\Scripts\activate
-# On macOS/Linux
-source venv/bin/activate
 
 pip install -r requirements.txt
+
+uvicorn app.main:app --reload
 ```
 
-Start the backend server:
-```bash
-python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+Backend
+
 ```
-The backend API will run at `http://localhost:8000`.
+http://127.0.0.1:8000
+```
 
-### 2. Frontend Setup
+Swagger Docs
 
-Navigate to the frontend directory and install dependencies:
+```
+http://127.0.0.1:8000/docs
+```
+
+---
+
+# ⚙️ Frontend Setup
+
 ```bash
 cd frontend
-npm install
-```
 
-Start the frontend development server:
-```bash
+npm install
+
 npm run dev
 ```
-The web application will run at `http://localhost:5173`.
 
-## 📂 Project Structure
+Frontend
 
 ```
-HireMind-AI/
-├── backend/
-│   ├── app/
-│   │   ├── api/          # API Controllers (coding, auth, etc.)
-│   │   ├── models.py     # SQLAlchemy DB Models
-│   │   ├── schemas.py    # Pydantic Schemas
-│   │   ├── services/     # Core Business Logic (coding_service, llm_service)
-│   │   └── main.py       # FastAPI Application Entry Point
-│   ├── requirements.txt
-│   └── hiremind.db       # SQLite Database
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/   # Reusable UI Components & Layouts
-│   │   ├── pages/        # Application Pages (CandidateDashboard, CodingDashboard)
-│   │   ├── index.css     # Global Tailwind CSS Styles
-│   │   └── App.jsx       # React Router Configuration
-│   ├── package.json
-│   └── vite.config.js
-│
-└── README.md
+http://localhost:5173
 ```
 
-## 🤝 Contributing
-Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
+---
 
-## 📝 License
-This project is licensed under the MIT License.
+# 🔑 Environment Variables
+
+Create
+
+```
+backend/.env
+```
+
+```env
+GROQ_API_KEY=YOUR_GROQ_API_KEY
+
+JWT_SECRET_KEY=YOUR_SECRET_KEY
+
+DATABASE_URL=sqlite:///hiremind.db
+```
+
+---
+
+# 📊 Modules
+
+| Module | Status |
+|----------|---------|
+| Authentication | ✅ |
+| Candidate Dashboard | ✅ |
+| Recruiter Dashboard | ✅ |
+| Resume Analyzer | ✅ |
+| Interview Studio | ✅ |
+| Coding Platform | ✅ |
+| AI Copilot | ✅ |
+| Reports | ✅ |
+| Learning Roadmap | ✅ |
+| Scheduling | ✅ |
+| Analytics | ✅ |
+
+---
+
+# 🔥 Highlights
+
+- AI Powered Resume Analysis
+- Modern SaaS UI
+- Responsive Design
+- Dark & Light Theme
+- JWT Authentication
+- Role Based Access Control
+- REST APIs
+- FastAPI Backend
+- React Frontend
+- AI Copilot
+- Resume ATS Analysis
+- Coding Platform
+- Interview Platform
+- Analytics Dashboard
+- Recruiter Management
+
+---
+
+# 📸 Screenshots
+
+## Candidate Dashboard
+
+_Add Dashboard Screenshot_
+
+---
+
+## Resume Analyzer
+
+_Add Screenshot_
+
+---
+
+## Interview Studio
+
+_Add Screenshot_
+
+---
+
+## Coding Platform
+
+_Add Screenshot_
+
+---
+
+## Recruiter Dashboard
+
+_Add Screenshot_
+
+---
+
+# 🔮 Future Improvements
+
+- PostgreSQL Support
+- Docker Production Deployment
+- Kubernetes Deployment
+- CI/CD Pipeline
+- AI Voice Interview
+- Webcam Proctoring
+- Real-Time Collaboration
+- Email Notifications
+- Calendar Integration
+- Video Interview Recording
+- AI Candidate Ranking
+- Resume Templates
+- Company Dashboard
+- Multi-language Compiler
+
+---
+
+# 🤝 Contributing
+
+Contributions are welcome.
+
+1. Fork Repository
+
+2. Create Branch
+
+```bash
+git checkout -b feature/new-feature
+```
+
+3. Commit
+
+```bash
+git commit -m "Added new feature"
+```
+
+4. Push
+
+```bash
+git push origin feature/new-feature
+```
+
+5. Open Pull Request
+
+---
+
+# 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+# 👨‍💻 Author
+
+## Raj Narharia
+
+Artificial Intelligence Engineer
+
+- GitHub: https://github.com/rajnarharia
+- LinkedIn: https://www.linkedin.com/in/rajnarharia
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+It helps the project reach more developers and motivates future improvements.
+
+---
+
+<div align="center">
+
+### ⭐ Star the Repository if you like this project!
+
+Made with ❤️ by Raj Narharia
+
+</div>
