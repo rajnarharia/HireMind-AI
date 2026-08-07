@@ -51,7 +51,7 @@ function LoginPage() {
           <p className="text-gray-400">Enter your credentials to access the cognitive engine</p>
         </div>
 
-        <div className="glass-card bg-black/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+        <div className="glass-card hover-3d bg-black/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-2">Email address</label>
@@ -93,7 +93,7 @@ function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full btn-premium flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed group mt-4"
+              className="w-full btn-premium btn-3d flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed group mt-4"
             >
               {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

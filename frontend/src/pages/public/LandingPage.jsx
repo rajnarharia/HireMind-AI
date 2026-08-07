@@ -7,6 +7,40 @@ import {
   Zap, Cpu, Globe, Server, Cloud, Database, User
 } from 'lucide-react';
 
+// A 3D animated core component using framer-motion and CSS 3D transforms
+const Animated3DCore = () => {
+  return (
+    <div className="relative w-full h-[300px] md:h-[400px] perspective-[1200px] flex items-center justify-center scale-75 md:scale-100">
+      <motion.div
+        animate={{
+          rotateX: [0, 360],
+          rotateY: [0, -360],
+        }}
+        transition={{
+          duration: 25,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        className="w-48 h-48 relative transform-style-3d"
+      >
+        {/* Glow behind cube */}
+        <div className="absolute inset-0 bg-primary/20 blur-[80px] rounded-full scale-150 animate-pulse"></div>
+        
+        {/* Cube faces - Adapts to light/dark */}
+        <div className="absolute inset-0 border border-gray-300 dark:border-white/40 bg-white/40 dark:bg-white/5 backdrop-blur-md flex items-center justify-center" style={{ transform: 'translateZ(96px)' }}><Cpu className="w-16 h-16 text-gray-800 dark:text-white opacity-90"/></div>
+        <div className="absolute inset-0 border border-gray-300 dark:border-white/40 bg-white/40 dark:bg-white/5 backdrop-blur-md flex items-center justify-center" style={{ transform: 'rotateY(180deg) translateZ(96px)' }}><BrainCircuit className="w-16 h-16 text-gray-800 dark:text-white opacity-90"/></div>
+        <div className="absolute inset-0 border border-gray-300 dark:border-white/40 bg-white/40 dark:bg-white/5 backdrop-blur-md flex items-center justify-center" style={{ transform: 'rotateY(90deg) translateZ(96px)' }}><Bot className="w-16 h-16 text-gray-800 dark:text-white opacity-90"/></div>
+        <div className="absolute inset-0 border border-gray-300 dark:border-white/40 bg-white/40 dark:bg-white/5 backdrop-blur-md flex items-center justify-center" style={{ transform: 'rotateY(-90deg) translateZ(96px)' }}><Code2 className="w-16 h-16 text-gray-800 dark:text-white opacity-90"/></div>
+        <div className="absolute inset-0 border border-gray-300 dark:border-white/40 bg-white/40 dark:bg-white/5 backdrop-blur-md flex items-center justify-center" style={{ transform: 'rotateX(90deg) translateZ(96px)' }}><Sparkles className="w-16 h-16 text-gray-800 dark:text-white opacity-90"/></div>
+        <div className="absolute inset-0 border border-gray-300 dark:border-white/40 bg-white/40 dark:bg-white/5 backdrop-blur-md flex items-center justify-center" style={{ transform: 'rotateX(-90deg) translateZ(96px)' }}><Target className="w-16 h-16 text-gray-800 dark:text-white opacity-90"/></div>
+        
+        {/* Inner Glowing Core */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-primary dark:bg-white rounded-full shadow-[0_0_50px_var(--color-primary),0_0_100px_rgba(37,99,235,0.5),0_0_150px_rgba(37,99,235,0.3)] dark:shadow-[0_0_50px_#fff,0_0_100px_rgba(255,255,255,0.8),0_0_150px_rgba(255,255,255,0.5)] animate-pulse"></div>
+      </motion.div>
+    </div>
+  );
+};
+
 function LandingPage() {
   const navigate = useNavigate();
   const { login } = useAuth();
@@ -51,39 +85,46 @@ function LandingPage() {
   };
 
 
+  const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-primary/30 font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-gray-50 dark:bg-black text-gray-900 dark:text-white selection:bg-primary/30 font-sans overflow-x-hidden">
       
       {/* Dynamic Background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[120px] mix-blend-screen opacity-50 animate-blob"></div>
-        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/20 blur-[120px] mix-blend-screen opacity-50 animate-blob" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-[20%] right-[20%] w-[30%] h-[30%] rounded-full bg-accent/20 blur-[120px] mix-blend-screen opacity-40 animate-blob" style={{ animationDelay: '4s' }}></div>
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+        <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/20 blur-[120px] dark:mix-blend-screen opacity-70 dark:opacity-50 animate-blob"></div>
+        <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] rounded-full bg-secondary/20 blur-[120px] dark:mix-blend-screen opacity-70 dark:opacity-50 animate-blob" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-[20%] right-[20%] w-[30%] h-[30%] rounded-full bg-accent/20 blur-[120px] dark:mix-blend-screen opacity-60 dark:opacity-40 animate-blob" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] dark:opacity-20 mix-blend-overlay"></div>
         {/* Subtle Grid */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(0,0,0,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.05)_1px,transparent_1px)] dark:bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"></div>
       </div>
 
       {/* Modern Floating Navbar */}
-      <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl z-50 transition-all duration-500 rounded-full ${scrolled ? 'bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl py-3 px-6' : 'bg-transparent py-4 px-4'}`}>
+      <nav className={`fixed top-6 left-1/2 -translate-x-1/2 w-[90%] max-w-7xl z-50 transition-all duration-500 rounded-full ${scrolled ? 'bg-white/90 dark:bg-black/60 backdrop-blur-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] dark:shadow-[0_10px_50px_-15px_var(--color-primary)] py-3 px-6' : 'bg-transparent py-4 px-4'}`}>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => scrollTo('platform')}>
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/20 relative overflow-hidden">
               <div className="absolute inset-0 bg-white/20 animate-shimmer"></div>
               <span className="font-black text-xl text-white relative z-10">H</span>
             </div>
-            <span className="text-xl font-black tracking-tight hidden sm:block">HireMind<span className="text-primary">.ai</span></span>
+            <span className="text-xl font-black tracking-tight hidden sm:block text-gray-900 dark:text-white">HireMind<span className="text-primary">.ai</span></span>
           </div>
           
-          <div className="hidden md:flex items-center gap-8 font-medium text-sm text-gray-300">
-            <a href="#platform" className="hover:text-white transition-colors">Platform</a>
-            <a href="#features" className="hover:text-white transition-colors">Features</a>
-            <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+          <div className="hidden md:flex items-center gap-8 font-medium text-sm text-gray-600 dark:text-gray-300">
+            <button onClick={() => scrollTo('platform')} className="hover:text-primary dark:hover:text-white transition-colors">Platform</button>
+            <button onClick={() => scrollTo('features')} className="hover:text-primary dark:hover:text-white transition-colors">Features</button>
+            <button onClick={() => scrollTo('pricing')} className="hover:text-primary dark:hover:text-white transition-colors">Pricing</button>
           </div>
 
           <div className="flex items-center gap-4">
-            <button onClick={() => navigate('/login')} className="text-sm font-bold text-gray-300 hover:text-white transition-colors hidden sm:block">Sign In</button>
-            <button onClick={() => navigate('/register')} className="px-5 py-2.5 bg-white text-black text-sm font-bold rounded-full hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 shadow-lg shadow-white/10">
+            <button onClick={() => navigate('/login')} className="text-sm font-bold text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-white transition-colors hidden sm:block">Sign In</button>
+            <button onClick={() => navigate('/register')} className="px-5 py-2.5 btn-custom-theme btn-3d text-white text-sm font-bold rounded-full hover:opacity-90 transition-all shadow-lg shadow-primary/20">
               Get Started
             </button>
           </div>
@@ -93,24 +134,24 @@ function LandingPage() {
       <main className="relative z-10">
         
         {/* Hero Section */}
-        <section className="pt-40 pb-20 px-6 lg:pt-52 lg:pb-32 flex flex-col items-center text-center">
+        <section id="platform" className="pt-40 pb-20 px-6 lg:pt-52 lg:pb-32 flex flex-col items-center text-center">
           <motion.div 
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm font-medium mb-8 backdrop-blur-md"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-gray-200 dark:border-white/10 text-sm font-medium mb-8 backdrop-blur-md shadow-sm"
           >
             <Sparkles className="w-4 h-4 text-primary" /> 
-            <span className="text-gray-300">Introducing HireMind 2.0</span>
-            <span className="w-1 h-1 rounded-full bg-gray-500 mx-1"></span>
-            <a href="#" className="text-primary hover:text-white transition-colors flex items-center gap-1">Read announcement <ArrowRight className="w-3 h-3"/></a>
+            <span className="text-gray-700 dark:text-gray-300">Introducing HireMind 2.0</span>
+            <span className="w-1 h-1 rounded-full bg-gray-400 dark:bg-gray-500 mx-1"></span>
+            <a href="#" className="text-primary hover:text-gray-900 dark:hover:text-white transition-colors flex items-center gap-1">Read announcement <ArrowRight className="w-3 h-3"/></a>
           </motion.div>
 
           <motion.h1 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 max-w-5xl leading-[1.1]"
+            className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 max-w-5xl leading-[1.1] text-gray-900 dark:text-white"
           >
             Hire the best.<br/>
             <span className="text-gradient">Zero friction.</span>
@@ -120,7 +161,7 @@ function LandingPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-lg md:text-xl text-gray-400 max-w-2xl mb-12 font-medium"
+            className="text-lg md:text-xl text-gray-600 dark:text-gray-400 max-w-2xl mb-12 font-medium"
           >
             The world's first autonomous AI hiring platform. From resume parsing to live technical interviews, hire 10x faster with absolute precision.
           </motion.p>
@@ -131,72 +172,22 @@ function LandingPage() {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center gap-4"
           >
-            <button onClick={() => handleDemoLogin('recruiter')} className="px-8 py-4 bg-white text-black font-black rounded-full hover:bg-gray-100 transition-all hover:scale-105 active:scale-95 shadow-xl shadow-white/10 flex items-center gap-2 w-full sm:w-auto justify-center text-lg">
-              <Rocket className="w-5 h-5" /> Live Recruiter Demo
+            <button onClick={() => handleDemoLogin('recruiter')} className="px-8 py-4 btn-custom-theme btn-3d text-white font-black rounded-full hover:opacity-90 transition-all shadow-xl shadow-primary/20 flex items-center gap-2 w-full sm:w-auto justify-center text-lg">
+              <Rocket className="w-5 h-5 text-white" /> Live Recruiter Demo
             </button>
-            <button onClick={() => handleDemoLogin('candidate')} className="px-8 py-4 bg-white/10 text-white font-bold rounded-full hover:bg-white/20 backdrop-blur-md border border-white/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 w-full sm:w-auto justify-center text-lg">
+            <button onClick={() => handleDemoLogin('candidate')} className="px-8 py-4 bg-white dark:bg-white/10 text-gray-900 dark:text-white font-bold rounded-full hover:bg-gray-50 dark:hover:bg-white/20 backdrop-blur-md border border-gray-200 dark:border-white/10 btn-3d flex items-center gap-2 w-full sm:w-auto justify-center text-lg shadow-sm">
               <User className="w-5 h-5" /> Try Candidate Flow
             </button>
           </motion.div>
 
-          {/* Abstract UI Preview */}
-          <motion.div 
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            className="mt-24 w-full max-w-6xl relative"
-          >
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary via-secondary to-accent rounded-3xl blur-2xl opacity-30"></div>
-            <div className="relative rounded-3xl border border-white/10 bg-black/50 backdrop-blur-xl overflow-hidden shadow-2xl flex flex-col items-center p-8 aspect-video">
-               <div className="absolute top-4 left-4 flex gap-2">
-                 <div className="w-3 h-3 rounded-full bg-red-500/80"></div>
-                 <div className="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                 <div className="w-3 h-3 rounded-full bg-green-500/80"></div>
-               </div>
-               {/* Mockup Content */}
-               <div className="mt-12 w-full max-w-4xl grid grid-cols-3 gap-6">
-                 <div className="col-span-1 space-y-4">
-                   <div className="h-24 rounded-2xl bg-white/5 border border-white/5 p-4 flex flex-col justify-center">
-                     <div className="h-2 w-1/2 bg-white/20 rounded mb-2"></div>
-                     <div className="h-6 w-3/4 bg-gradient-to-r from-primary to-accent rounded"></div>
-                   </div>
-                   <div className="h-48 rounded-2xl bg-white/5 border border-white/5 p-4">
-                      <div className="h-2 w-1/3 bg-white/20 rounded mb-4"></div>
-                      <div className="space-y-2">
-                        <div className="h-2 w-full bg-white/10 rounded"></div>
-                        <div className="h-2 w-5/6 bg-white/10 rounded"></div>
-                        <div className="h-2 w-4/6 bg-white/10 rounded"></div>
-                      </div>
-                   </div>
-                 </div>
-                 <div className="col-span-2 space-y-4">
-                   <div className="h-48 rounded-2xl bg-gradient-to-br from-primary/10 to-secondary/10 border border-primary/20 p-6 flex flex-col relative overflow-hidden">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full"></div>
-                      <div className="h-3 w-1/4 bg-primary/50 rounded mb-6"></div>
-                      <div className="flex-1 rounded-xl bg-black/40 border border-white/5 p-4">
-                        <div className="font-mono text-xs text-primary/80 mb-2">AI Analyzing candidate response...</div>
-                        <div className="h-2 w-full bg-white/10 rounded mb-2"></div>
-                        <div className="h-2 w-3/4 bg-white/10 rounded"></div>
-                      </div>
-                   </div>
-                   <div className="h-24 rounded-2xl bg-white/5 border border-white/5 flex items-center p-6 gap-4">
-                     <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center"><Bot className="text-accent w-6 h-6"/></div>
-                     <div>
-                       <div className="h-3 w-32 bg-white/20 rounded mb-2"></div>
-                       <div className="h-2 w-48 bg-white/10 rounded"></div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-            </div>
-          </motion.div>
+            <Animated3DCore />
         </section>
 
         {/* Logos */}
-        <section className="py-10 border-y border-white/5 bg-white/[0.02]">
+        <section className="py-10 border-y border-gray-200 dark:border-white/5 bg-white/50 dark:bg-white/[0.02]">
           <div className="max-w-7xl mx-auto px-6 text-center">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest mb-8">Powering the next generation of teams</p>
-            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+            <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 opacity-50 grayscale hover:grayscale-0 transition-all duration-500 text-gray-900 dark:text-white">
               <Globe className="w-8 h-8" />
               <Cpu className="w-8 h-8" />
               <Server className="w-8 h-8" />
@@ -210,8 +201,8 @@ function LandingPage() {
         <section id="features" className="py-32 px-6">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-20">
-              <h2 className="text-4xl md:text-5xl font-black mb-6">A completely new way to hire.</h2>
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto">We rebuilt the ATS from the ground up, infusing AI into every step of the funnel to eliminate bias and save hundreds of hours.</p>
+              <h2 className="text-4xl md:text-5xl font-black mb-6 text-gray-900 dark:text-white">A completely new way to hire.</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">We rebuilt the ATS from the ground up, infusing AI into every step of the funnel to eliminate bias and save hundreds of hours.</p>
             </div>
 
             <motion.div 
@@ -259,14 +250,14 @@ function LandingPage() {
                   bg: "from-rose-500/10 to-transparent"
                 }
               ].map((f, i) => (
-                <motion.div key={i} variants={fadeInUp} className="group relative">
+                <motion.div key={i} variants={fadeInUp} className="group relative hover-3d">
                   <div className={`absolute inset-0 bg-gradient-to-br ${f.bg} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl blur-xl`}></div>
-                  <div className="relative h-full bg-white/[0.02] border border-white/5 rounded-3xl p-8 hover:bg-white/[0.04] transition-colors">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 shadow-lg">
+                  <div className="relative h-full bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 rounded-3xl p-8 hover:bg-gray-50 dark:hover:bg-white/[0.04] transition-colors shadow-sm">
+                    <div className="w-12 h-12 rounded-2xl bg-gray-50 dark:bg-white/5 border border-gray-100 dark:border-white/10 flex items-center justify-center mb-6 shadow-sm">
                       {f.icon}
                     </div>
-                    <h3 className="text-xl font-bold mb-3">{f.title}</h3>
-                    <p className="text-gray-400 leading-relaxed text-sm">{f.desc}</p>
+                    <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white">{f.title}</h3>
+                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">{f.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -275,12 +266,12 @@ function LandingPage() {
         </section>
 
         {/* Pricing */}
-        <section id="pricing" className="py-32 px-6 bg-black relative">
+        <section id="pricing" className="py-32 px-6 bg-gray-50 dark:bg-black relative">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none"></div>
           <div className="max-w-5xl mx-auto relative z-10">
             <div className="text-center mb-20">
-              <h2 className="text-4xl md:text-5xl font-black mb-6">Simple, transparent pricing.</h2>
-              <p className="text-xl text-gray-400">Scale your engineering team without scaling your HR headcount.</p>
+              <h2 className="text-4xl md:text-5xl font-black mb-6 text-gray-900 dark:text-white">Simple, transparent pricing.</h2>
+              <p className="text-xl text-gray-600 dark:text-gray-400">Scale your engineering team without scaling your HR headcount.</p>
             </div>
             
             <motion.div 
@@ -306,22 +297,22 @@ function LandingPage() {
                   primary: true
                 }
               ].map((p, i) => (
-                <motion.div key={i} variants={fadeInUp} className={`rounded-3xl p-10 border ${p.primary ? 'bg-gradient-to-b from-primary/20 to-secondary/10 border-primary/50 relative overflow-hidden shadow-2xl shadow-primary/20 hover:-translate-y-2 transition-transform duration-500' : 'bg-white/5 border-white/10 hover:bg-white/10 transition-colors'}`}>
+                <motion.div key={i} variants={fadeInUp} className={`rounded-3xl p-10 border hover-3d ${p.primary ? 'bg-gradient-to-b from-primary/10 dark:from-primary/20 to-secondary/5 dark:to-secondary/10 border-primary/50 relative overflow-hidden shadow-2xl shadow-primary/20 transition-all duration-500' : 'bg-white dark:bg-white/5 border-gray-200 dark:border-white/10 hover:bg-gray-50 dark:hover:bg-white/10 transition-colors shadow-sm'}`}>
                   {p.primary && <div className="absolute top-0 right-0 w-32 h-32 bg-primary/30 blur-[50px]"></div>}
-                  <h3 className="text-2xl font-bold mb-2">{p.tier}</h3>
+                  <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{p.tier}</h3>
                   <div className="mb-4">
-                    <span className="text-5xl font-black">{p.price}</span>
-                    {p.price !== "Custom" && <span className="text-gray-400">/mo</span>}
+                    <span className="text-5xl font-black text-gray-900 dark:text-white">{p.price}</span>
+                    {p.price !== "Custom" && <span className="text-gray-500 dark:text-gray-400">/mo</span>}
                   </div>
-                  <p className="text-gray-400 mb-8 h-12">{p.desc}</p>
+                  <p className="text-gray-600 dark:text-gray-400 mb-8 h-12">{p.desc}</p>
                   <ul className="space-y-4 mb-10">
                     {p.features.map((f, j) => (
-                      <li key={j} className="flex items-center gap-3 text-sm font-medium">
+                      <li key={j} className="flex items-center gap-3 text-sm font-medium text-gray-700 dark:text-gray-300">
                         <CheckCircle2 className="w-5 h-5 text-primary shrink-0" /> {f}
                       </li>
                     ))}
                   </ul>
-                  <button className={`w-full py-4 rounded-xl font-bold transition-all ${p.primary ? 'bg-white text-black hover:bg-gray-200' : 'bg-white/10 text-white hover:bg-white/20'}`}>
+                  <button className={`w-full py-4 rounded-xl font-bold transition-all btn-3d ${p.primary ? 'btn-custom-theme text-white shadow-lg shadow-primary/20' : 'bg-gray-100 dark:bg-white/10 text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-white/20 border border-gray-200 dark:border-white/10'}`}>
                     {p.primary ? 'Contact Sales' : 'Start Free Trial'}
                   </button>
                 </motion.div>
@@ -332,15 +323,15 @@ function LandingPage() {
 
         {/* CTA */}
         <section className="py-32 px-6">
-          <div className="max-w-5xl mx-auto bg-gradient-to-br from-primary to-secondary rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden border border-white/20 shadow-2xl shadow-primary/20">
+          <div className="max-w-5xl mx-auto bg-gradient-to-br from-primary to-secondary rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden border border-white/20 shadow-2xl shadow-primary/20 hover-3d">
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-white/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3"></div>
             
-            <h2 className="text-4xl md:text-6xl font-black mb-6 relative z-10 tracking-tight">Ready to build your dream team?</h2>
-            <p className="text-xl text-white/80 max-w-2xl mx-auto mb-10 relative z-10 font-medium">
+            <h2 className="text-4xl md:text-6xl font-black mb-6 relative z-10 tracking-tight text-white">Ready to build your dream team?</h2>
+            <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10 relative z-10 font-medium">
               Join the most innovative companies using AI to identify and hire top talent.
             </p>
             <div className="flex justify-center relative z-10">
-              <button onClick={() => navigate('/register')} className="px-10 py-5 bg-white text-black font-black rounded-full hover:scale-105 transition-transform flex items-center gap-3 text-lg shadow-xl shadow-black/20">
+              <button onClick={() => navigate('/register')} className="px-10 py-5 bg-white text-gray-900 font-black rounded-full transition-transform flex items-center gap-3 text-lg shadow-xl shadow-black/20 btn-3d">
                 Get Started Now <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -348,17 +339,17 @@ function LandingPage() {
         </section>
 
         {/* Footer */}
-        <footer className="border-t border-white/10 py-12 bg-black">
+        <footer className="border-t border-gray-200 dark:border-white/10 py-12 bg-white dark:bg-black">
           <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-white text-black flex items-center justify-center font-black text-sm">H</div>
-              <span className="font-bold text-white tracking-tight">HireMind AI</span>
+              <div className="w-8 h-8 rounded-lg bg-gray-900 dark:bg-white text-white dark:text-black flex items-center justify-center font-black text-sm shadow-md">H</div>
+              <span className="font-bold text-gray-900 dark:text-white tracking-tight">HireMind AI</span>
             </div>
             <div className="text-sm font-medium text-gray-500">© 2026 HireMind, Inc. All rights reserved.</div>
-            <div className="flex items-center gap-6 text-sm font-medium text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
-              <a href="#" className="hover:text-white transition-colors">Twitter</a>
+            <div className="flex items-center gap-6 text-sm font-medium text-gray-500 dark:text-gray-400">
+              <a href="#" className="hover:text-primary dark:hover:text-white transition-colors">Privacy</a>
+              <a href="#" className="hover:text-primary dark:hover:text-white transition-colors">Terms</a>
+              <a href="#" className="hover:text-primary dark:hover:text-white transition-colors">Twitter</a>
             </div>
           </div>
         </footer>

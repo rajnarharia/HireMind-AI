@@ -27,7 +27,7 @@ export default function InterviewLobby({ resumes, history, isProcessing, onStart
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 flex-1">
         
         {/* Start New */}
-        <div className="glass-card rounded-3xl p-8 relative overflow-hidden group hover:border-emerald-500/30 transition-all flex flex-col">
+        <div className="glass-card hover-3d rounded-3xl p-8 relative overflow-hidden group hover:border-emerald-500/30 transition-all flex flex-col">
           <div className="absolute -top-32 -right-32 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px] group-hover:bg-emerald-500/20 transition-colors pointer-events-none"></div>
           
           <div className="flex items-center gap-4 mb-8">
@@ -63,7 +63,7 @@ export default function InterviewLobby({ resumes, history, isProcessing, onStart
                   <button 
                     onClick={() => onStart(resume.id)} 
                     disabled={isProcessing}
-                    className="w-full sm:w-auto btn-premium px-6 py-2.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-emerald-500/20"
+                    className="w-full sm:w-auto btn-premium btn-3d px-6 py-2.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-emerald-500/20"
                   >
                     {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Launch'}
                   </button>
@@ -74,7 +74,7 @@ export default function InterviewLobby({ resumes, history, isProcessing, onStart
         </div>
 
         {/* History */}
-        <div className="glass-card rounded-3xl p-8 relative overflow-hidden group hover:border-primary/30 transition-all flex flex-col">
+        <div className="glass-card hover-3d rounded-3xl p-8 relative overflow-hidden group hover:border-primary/30 transition-all flex flex-col">
           <div className="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-[80px] group-hover:bg-primary/20 transition-colors pointer-events-none"></div>
           
           <div className="flex items-center gap-4 mb-8">

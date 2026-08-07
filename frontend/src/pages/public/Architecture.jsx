@@ -9,7 +9,7 @@ function Architecture() {
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       
       {/* Navbar */}
-      <nav className="fixed w-full z-50 glass-card border-b border-gray-200/50 dark:border-gray-800/50 backdrop-blur-xl">
+      <nav className="fixed w-full z-50 glass-card hover-3d border-b border-gray-200/50 dark:border-gray-800/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <button onClick={() => navigate('/')} className="flex items-center gap-2 font-bold text-gray-500 hover:text-primary transition-colors">
             <ArrowLeft className="w-5 h-5"/> Back to Home
@@ -32,7 +32,7 @@ function Architecture() {
         </motion.div>
 
         {/* Frontend Arch */}
-        <div className="mb-16 glass-card p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
+        <div className="mb-16 glass-card hover-3d p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-xl flex items-center justify-center">
               <LayoutDashboard className="w-6 h-6"/>
@@ -55,7 +55,7 @@ function Architecture() {
         </div>
 
         {/* Backend Arch */}
-        <div className="mb-16 glass-card p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
+        <div className="mb-16 glass-card hover-3d p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 rounded-xl flex items-center justify-center">
               <Code2 className="w-6 h-6"/>
@@ -78,7 +78,7 @@ function Architecture() {
         </div>
 
         {/* AI & RAG Arch */}
-        <div className="glass-card p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
+        <div className="glass-card hover-3d p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
           <div className="flex items-center gap-4 mb-6">
             <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 rounded-xl flex items-center justify-center">
               <BrainCircuit className="w-6 h-6"/>

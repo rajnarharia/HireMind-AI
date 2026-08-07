@@ -104,7 +104,7 @@ export default function NotificationDropdown() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 10, scale: 0.95 }}
             transition={{ duration: 0.2 }}
-            className="absolute right-0 mt-2 w-80 sm:w-96 glass-card rounded-2xl shadow-2xl overflow-hidden z-50 border border-gray-200 dark:border-white/10"
+            className="absolute right-0 mt-2 w-80 sm:w-96 bg-white dark:bg-[var(--surface)] rounded-2xl shadow-2xl overflow-hidden z-50 border border-gray-200 dark:border-white/10"
           >
             <div className="p-4 border-b border-gray-200 dark:border-white/10 flex justify-between items-center bg-white/50 dark:bg-black/20 backdrop-blur-md">
               <h3 className="font-bold text-gray-900 dark:text-white">Notifications</h3>
@@ -118,7 +118,7 @@ export default function NotificationDropdown() {
               )}
             </div>
 
-            <div className="max-h-[400px] overflow-y-auto custom-scrollbar bg-white/80 dark:bg-[#111827]/80 backdrop-blur-xl">
+            <div className="max-h-[400px] overflow-y-auto custom-scrollbar bg-white/80 dark:bg-[var(--surface)]/80 backdrop-blur-xl">
               {loading ? (
                 <div className="p-8 text-center text-gray-500">
                   <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mx-auto mb-2"></div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   LayoutDashboard, Settings, LogOut, Menu, X, ChevronLeft, Sun, Moon,
@@ -11,23 +12,11 @@ import NotificationDropdown from '../common/NotificationDropdown';
 
 const DashboardLayout = () => {
   const { user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const location = useLocation();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState(
-    document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-  );
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    if (newTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  };
 
   const handleLogout = () => {
     logout();
@@ -58,7 +47,7 @@ const DashboardLayout = () => {
       <motion.aside 
         initial={false}
         animate={{ width: sidebarOpen ? 260 : 70 }}
-        className="hidden md:flex flex-col bg-white dark:bg-[#07090D] border-r border-gray-200 dark:border-white/5 z-30 transition-all duration-300 relative"
+        className="hidden md:flex flex-col bg-white dark:bg-[var(--surface)] border-r border-gray-200 dark:border-white/5 z-30 transition-all duration-300 relative backdrop-blur-md"
       >
         <div className="h-16 flex items-center justify-between px-5 border-b border-transparent">
           <div className="flex items-center gap-3 overflow-hidden whitespace-nowrap mt-2">
@@ -71,7 +60,7 @@ const DashboardLayout = () => {
 
         <button 
           onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="absolute -right-3 top-6 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-full p-1 shadow-sm hover:scale-110 transition-transform z-40 text-gray-500 dark:text-gray-400"
+          className="absolute -right-3 top-6 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 rounded-full p-1 shadow-sm hover:scale-110 transition-transform z-40 text-gray-500 dark:text-gray-400"
         >
           <motion.div animate={{ rotate: sidebarOpen ? 0 : 180 }}>
             <ChevronLeft className="w-3 h-3" />
@@ -173,12 +162,12 @@ const DashboardLayout = () => {
       </AnimatePresence>
 
       {/* Main Content Area */}
-      <main className="flex-1 flex flex-col min-w-0 bg-[#F5F7FA] dark:bg-[#07090D] overflow-hidden rounded-tl-3xl md:border-l md:border-t md:border-gray-200 md:dark:border-white/5 md:mt-2 shadow-2xl shadow-black/5 dark:shadow-none">
+      <main className="flex-1 flex flex-col min-w-0 bg-gray-50/50 dark:bg-transparent overflow-hidden rounded-tl-3xl md:border-l md:border-t md:border-gray-200 md:dark:border-white/5 md:mt-2 shadow-2xl shadow-black/5 dark:shadow-none relative z-10 backdrop-blur-sm">
         
         {/* Top Navbar */}
         <header className="h-16 flex items-center justify-between px-8 bg-transparent sticky top-0 z-20">
           
-          <div className="flex items-center gap-4 bg-white dark:bg-[#111827] rounded-full px-4 py-1.5 border border-gray-200 dark:border-white/5 cursor-pointer hover:border-primary/50 transition-colors" onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}>
+          <div className="flex items-center gap-4 bg-white dark:bg-[var(--surface)] rounded-full px-4 py-1.5 border border-gray-200 dark:border-white/5 cursor-pointer hover:border-primary/50 transition-colors" onClick={() => window.dispatchEvent(new CustomEvent('open-command-palette'))}>
             <Search className="w-4 h-4 text-gray-400" />
             <input 
               type="text" 
@@ -207,7 +196,7 @@ const DashboardLayout = () => {
                 </div>
               </div>
               
-              <div id="profile-dropdown" className="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-[#111827] rounded-xl shadow-xl py-2 border border-gray-200 dark:border-white/10 z-50">
+              <div id="profile-dropdown" className="hidden absolute right-0 mt-2 w-48 bg-white dark:bg-[var(--surface)] rounded-xl shadow-xl py-2 border border-gray-200 dark:border-white/10 z-50">
                 <button onClick={() => navigate('/dashboard/profile')} className="w-full text-left px-4 py-2 hover:bg-gray-50 dark:hover:bg-white/5 text-sm font-medium text-gray-700 dark:text-gray-300">Profile Settings</button>
                 <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-red-50 dark:hover:bg-red-500/10 text-red-600 dark:text-red-400 text-sm font-medium">Log out</button>
               </div>
@@ -217,18 +206,9 @@ const DashboardLayout = () => {
 
         {/* Dynamic Page Content */}
         <div className="flex-1 overflow-y-auto p-4 md:p-8 custom-scrollbar relative">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.2 }}
-              className="max-w-7xl mx-auto h-full relative z-10"
-            >
-              <Outlet />
-            </motion.div>
-          </AnimatePresence>
+          <div className="max-w-7xl mx-auto h-full relative z-10">
+            <Outlet />
+          </div>
         </div>
       </main>
 

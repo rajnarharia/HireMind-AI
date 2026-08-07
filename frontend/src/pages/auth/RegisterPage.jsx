@@ -56,7 +56,7 @@ function RegisterPage() {
           <p className="text-gray-400">Join HireMind to transform your hiring experience</p>
         </div>
 
-        <div className="glass-card bg-black/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
+        <div className="glass-card hover-3d bg-black/40 border border-white/10 rounded-3xl p-8 backdrop-blur-xl shadow-2xl">
           <form onSubmit={handleRegister} className="space-y-5">
             
             {/* Role Selection */}
@@ -66,7 +66,7 @@ function RegisterPage() {
                 onClick={() => setFormData({ ...formData, role: 'candidate' })}
                 className={`py-3 px-4 rounded-xl text-sm font-bold transition-all border ${
                   formData.role === 'candidate'
-                    ? 'btn-premium border-transparent'
+                    ? 'btn-premium btn-3d border-transparent'
                     : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'
                 } flex items-center justify-center gap-2`}
               >
@@ -77,7 +77,7 @@ function RegisterPage() {
                 onClick={() => setFormData({ ...formData, role: 'recruiter' })}
                 className={`py-3 px-4 rounded-xl text-sm font-bold transition-all border ${
                   formData.role === 'recruiter'
-                    ? 'btn-premium border-transparent'
+                    ? 'btn-premium btn-3d border-transparent'
                     : 'bg-white/5 text-gray-400 border-white/10 hover:bg-white/10'
                 } flex items-center justify-center gap-2`}
               >
@@ -162,7 +162,7 @@ function RegisterPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full btn-premium flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed group mt-4"
+              className="w-full btn-premium btn-3d flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl text-sm font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed group mt-4"
             >
               {isLoading ? (
                 <Loader2 className="w-5 h-5 animate-spin" />

@@ -9,7 +9,7 @@ function CaseStudy() {
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       
       {/* Navbar */}
-      <nav className="fixed w-full z-50 glass-card border-b border-gray-200/50 dark:border-gray-800/50 backdrop-blur-xl">
+      <nav className="fixed w-full z-50 glass-card hover-3d border-b border-gray-200/50 dark:border-gray-800/50 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <button onClick={() => navigate('/')} className="flex items-center gap-2 font-bold text-gray-500 hover:text-primary transition-colors">
             <ArrowLeft className="w-5 h-5"/> Back to Home
@@ -33,7 +33,7 @@ function CaseStudy() {
 
         <div className="space-y-12">
           
-          <section className="glass-card p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
+          <section className="glass-card hover-3d p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
             <div className="flex items-center gap-3 mb-6">
               <Target className="w-8 h-8 text-red-500"/>
               <h2 className="text-2xl font-black">The Problem</h2>
@@ -49,7 +49,7 @@ function CaseStudy() {
             </div>
           </section>
 
-          <section className="glass-card p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
+          <section className="glass-card hover-3d p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
             <div className="flex items-center gap-3 mb-6">
               <Zap className="w-8 h-8 text-primary"/>
               <h2 className="text-2xl font-black">The Solution</h2>
@@ -65,7 +65,7 @@ function CaseStudy() {
             </div>
           </section>
 
-          <section className="glass-card p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
+          <section className="glass-card hover-3d p-8 rounded-3xl border border-gray-200 dark:border-gray-800">
             <div className="flex items-center gap-3 mb-6">
               <TrendingUp className="w-8 h-8 text-green-500"/>
               <h2 className="text-2xl font-black">Future Roadmap</h2>

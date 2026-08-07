@@ -30,22 +30,7 @@ import CopilotChat from './pages/copilot/CopilotChat';
 import NotFound from './pages/error/NotFound';
 import CommandPalette from './components/common/CommandPalette';
 
-function ThemeController() {
-  const location = useLocation();
-  const { setTheme } = useTheme();
-
-  useEffect(() => {
-    const path = location.pathname;
-    if (path.includes('/coding') || path.includes('/interview') || path.includes('/copilot')) {
-      setTheme('dark');
-    } else {
-      setTheme('light');
-    }
-  }, [location, setTheme]);
-
-  return null;
-}
-
+// Theme is managed directly in ThemeContext and user preferences.
 // Protected Route Component
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { user, loading } = useAuth();

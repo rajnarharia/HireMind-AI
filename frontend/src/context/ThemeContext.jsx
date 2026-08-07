@@ -6,22 +6,26 @@ export const useTheme = () => useContext(ThemeContext);
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(
-    localStorage.getItem('theme') || 'light'
+    localStorage.getItem('theme') || 'dark'
   );
-
-  // We can't use useLocation directly here unless it's wrapped in Router. 
-  // Wait, ThemeContext wraps Router in App.jsx. Let's move the location logic to a hook inside AppRoutes or handle it via a global effect, or just let pages set it on mount.
-  // Actually, we can export `setTheme` to allow pages to force their theme.
   
   useEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
+    
+    // Manage dark class for Tailwind
+    if (theme === 'light') {
+      root.classList.remove('dark');
+    } else {
+      root.classList.add('dark');
+    }
+    
+    // Cleanup old data-theme attributes
+    root.removeAttribute('data-theme');
     localStorage.setItem('theme', theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
   };
 
   return (

@@ -171,7 +171,7 @@ function CopilotChat() {
 
 
   return (
-    <div className="h-[calc(100vh-8rem)] flex rounded-3xl overflow-hidden glass-card border-0 shadow-2xl relative bg-white/50 dark:bg-[#0A0D14]/80">
+    <div className="h-[calc(100vh-8rem)] flex rounded-3xl overflow-hidden glass-card hover-3d border-0 shadow-2xl relative bg-white/50 dark:bg-[#0A0D14]/80">
       
       {/* Sidebar */}
       <div className="w-72 border-r border-gray-200 dark:border-white/5 bg-gray-50/50 dark:bg-black/20 flex flex-col hidden md:flex">
@@ -366,7 +366,7 @@ function CopilotChat() {
                   }
                 }}
                 placeholder="Ask Copilot anything..."
-                className="w-full pl-6 pr-16 py-5 bg-white dark:bg-[#111827] border border-gray-300 dark:border-white/10 rounded-3xl text-sm md:text-base text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary shadow-xl resize-none min-h-[72px] max-h-48 custom-scrollbar transition-all"
+                className="w-full pl-6 pr-16 py-5 bg-white dark:bg-[var(--surface)] border border-gray-300 dark:border-white/10 rounded-3xl text-sm md:text-base text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-primary/10 focus:border-primary shadow-xl resize-none min-h-[72px] max-h-48 custom-scrollbar transition-all"
                 rows="1"
               />
               <button

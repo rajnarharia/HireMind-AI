@@ -151,13 +151,13 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
         <h1 className="text-5xl font-black text-gray-900 dark:text-white">Interview Complete</h1>
         <p className="text-gray-500 text-lg max-w-lg">The AI has analyzed your responses. Generating your final evaluation report...</p>
         
-        <div className="glass-card px-8 py-6 rounded-3xl flex items-center gap-6 mt-8">
+        <div className="glass-card hover-3d px-8 py-6 rounded-3xl flex items-center gap-6 mt-8">
           <div className="text-left">
             <p className="text-xs font-bold text-gray-500 uppercase tracking-widest">Final Score</p>
             <p className="text-5xl font-black text-primary">{interview.overall_score || 0}<span className="text-xl text-gray-400">/100</span></p>
           </div>
           <div className="h-16 w-px bg-gray-200 dark:bg-white/10"></div>
-          <button onClick={onExit} className="btn-premium px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+          <button onClick={onExit} className="btn-premium btn-3d px-6 py-3 rounded-xl font-bold flex items-center gap-2">
             Return to Dashboard <Home className="w-4 h-4" />
           </button>
         </div>
@@ -180,10 +180,10 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
         <p className="text-gray-500 text-lg max-w-lg">The AI Engineer will ask you a series of questions. You can respond using your microphone or by typing.</p>
         
         <div className="flex gap-4 mt-8">
-          <button onClick={() => setHasStarted(true)} className="btn-premium px-8 py-4 rounded-xl font-bold flex items-center gap-2 text-lg transition-all hover:scale-105 shadow-xl shadow-primary/20">
+          <button onClick={() => setHasStarted(true)} className="btn-premium btn-3d px-8 py-4 rounded-xl font-bold flex items-center gap-2 text-lg transition-all hover:scale-105 shadow-xl shadow-primary/20">
             Start Interview <ArrowRight className="w-5 h-5" />
           </button>
-          <button onClick={onExit} className="bg-white/5 hover:bg-white/10 px-8 py-4 rounded-xl font-bold flex items-center gap-2 text-white transition-colors">
+          <button onClick={onExit} className="bg-gray-200 hover:bg-gray-300 dark:bg-white/5 dark:hover:bg-white/10 px-8 py-4 rounded-xl font-bold flex items-center gap-2 text-gray-900 dark:text-white transition-all btn-3d">
             Cancel
           </button>
         </div>
@@ -195,7 +195,7 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
     <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="h-full w-full max-w-7xl mx-auto flex flex-col z-10 relative">
       
       {/* HUD Header */}
-      <header className="flex items-center justify-between p-6 glass-card rounded-b-3xl md:rounded-3xl shadow-lg border-t-0 md:mt-4 mb-6 sticky top-0 z-50">
+      <header className="flex items-center justify-between p-6 glass-card hover-3d rounded-b-3xl md:rounded-3xl shadow-lg border-t-0 md:mt-4 mb-6 sticky top-0 z-50">
         <div className="flex items-center gap-6">
           <div className="flex flex-col">
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Progress</span>
@@ -223,7 +223,7 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
         {/* AI Avatar & Question Panel */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           {/* Avatar Area */}
-          <div className="glass-card rounded-3xl p-8 flex flex-col items-center justify-center relative overflow-hidden flex-1 group">
+          <div className="glass-card hover-3d rounded-3xl p-8 flex flex-col items-center justify-center relative overflow-hidden flex-1 group">
              <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent"></div>
              
              {/* Dynamic Orb */}
@@ -255,7 +255,7 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
           </div>
 
           {/* Real-time Confidence Metric */}
-          <div className="glass-card rounded-3xl p-6 relative overflow-hidden">
+          <div className="glass-card hover-3d rounded-3xl p-6 relative overflow-hidden">
              <div className="flex justify-between items-end mb-2">
                <span className="text-xs font-bold text-gray-400 uppercase tracking-widest flex items-center gap-2">
                  <Activity className="w-4 h-4 text-primary" /> Confidence Level
@@ -276,7 +276,7 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
         <div className="lg:col-span-7 flex flex-col gap-6 min-h-0">
            
            {/* Current Question */}
-           <div className="glass-card rounded-3xl p-8 bg-gradient-to-br from-white to-gray-50 dark:from-[#111827] dark:to-[#0A0D14] border-t-primary/30 shadow-2xl relative">
+           <div className="glass-card hover-3d rounded-3xl p-8 bg-gradient-to-br from-white to-gray-50 dark:from-[#111827] dark:to-[#0A0D14] border-t-primary/30 shadow-2xl relative">
              <div className="absolute top-4 left-8 text-[120px] font-black text-primary/5 leading-none pointer-events-none font-serif">Q</div>
              <div className="relative z-10">
                <h2 className="text-xl md:text-2xl font-medium text-gray-900 dark:text-white leading-relaxed">
@@ -288,7 +288,7 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
            </div>
 
            {/* Input Console */}
-           <div className="glass-card rounded-3xl p-2 flex-1 flex flex-col relative overflow-hidden bg-white/60 dark:bg-[#111827]/60">
+           <div className="glass-card hover-3d rounded-3xl p-2 flex-1 flex flex-col relative overflow-hidden bg-white/60 dark:bg-[var(--surface)]/60">
              
              {isRecording && (
                <div className="absolute inset-0 bg-red-500/5 pointer-events-none z-0"></div>
@@ -324,7 +324,7 @@ export default function InterviewStudio({ interview, isProcessing, onSubmitAnswe
                 <button 
                   onClick={handleSubmit}
                   disabled={isProcessing || !answerText.trim()}
-                  className="btn-premium px-8 py-4 rounded-xl font-black text-lg tracking-wider flex items-center gap-3 disabled:opacity-50 transition-all hover:pr-6 group"
+                  className="btn-premium btn-3d px-8 py-4 rounded-xl font-black text-lg tracking-wider flex items-center gap-3 disabled:opacity-50 transition-all hover:pr-6 group"
                 >
                   {isProcessing ? 'ANALYZING...' : 'SUBMIT'}
                   {!isProcessing && <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}

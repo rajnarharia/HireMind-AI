@@ -89,13 +89,13 @@ function RecruiterCandidateView() {
 
   if (!data) {
     return (
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-24 glass-card rounded-3xl max-w-2xl mx-auto border-dashed border-2">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center py-24 glass-card hover-3d rounded-3xl max-w-2xl mx-auto border-dashed border-2">
         <div className="w-20 h-20 bg-gray-100 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
           <AlertTriangle className="w-10 h-10 text-gray-400" />
         </div>
         <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Candidate Not Found</h2>
         <p className="text-gray-500 max-w-sm mx-auto">This application may not exist or has been removed from the pipeline.</p>
-        <button onClick={() => navigate(-1)} className="mt-8 btn-premium px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
+        <button onClick={() => navigate(-1)} className="mt-8 btn-premium btn-3d px-8 py-3.5 rounded-xl font-bold inline-flex items-center gap-2">
           <ChevronLeft className="w-5 h-5" /> Go Back
         </button>
       </motion.div>
@@ -119,7 +119,7 @@ function RecruiterCandidateView() {
         <div className="relative z-10 flex items-center gap-6">
           <button 
             onClick={() => navigate(-1)} 
-            className="p-3 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm shrink-0"
+            className="p-3 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 transition-all shadow-sm shrink-0"
           >
             <ChevronLeft className="w-6 h-6 text-gray-500" />
           </button>
@@ -149,7 +149,7 @@ function RecruiterCandidateView() {
         <div className="relative z-10 w-full md:w-auto">
           <button 
             onClick={() => navigate(`/recruiter/schedule/${appId}`, { state: { candidateId: data.user.id, candidateName: data.user.name } })}
-            className="w-full md:w-auto btn-premium px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg"
+            className="w-full md:w-auto btn-premium btn-3d px-6 py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg"
           >
             <Calendar className="w-5 h-5" /> Schedule Interview
           </button>
@@ -161,7 +161,7 @@ function RecruiterCandidateView() {
         {/* Left Column: Quick Actions & Scores */}
         <div className="space-y-8">
           
-          <div className="glass-card rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[#111827] relative overflow-hidden group">
+          <div className="glass-card hover-3d rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[var(--surface)] relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] pointer-events-none transition-all group-hover:bg-primary/10"></div>
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><Zap className="w-5 h-5 text-primary"/> Pipeline Actions</h2>
             
@@ -202,7 +202,7 @@ function RecruiterCandidateView() {
             </div>
           </div>
 
-          <div className="glass-card rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[#111827] relative overflow-hidden group">
+          <div className="glass-card hover-3d rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[var(--surface)] relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-[40px] pointer-events-none transition-all group-hover:bg-accent/10"></div>
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white relative z-10"><Award className="w-5 h-5 text-accent"/> AI Scores</h2>
             
@@ -228,7 +228,7 @@ function RecruiterCandidateView() {
         <div className="lg:col-span-2 space-y-8">
           
           {/* Radar Chart */}
-          <div className="glass-card rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[#111827] shadow-xl relative overflow-hidden">
+          <div className="glass-card hover-3d rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[var(--surface)] shadow-xl relative overflow-hidden">
             <h2 className="text-xl font-bold mb-2 flex items-center gap-2 text-gray-900 dark:text-white"><ShieldCheck className="w-5 h-5 text-primary"/> Competency Radar</h2>
             <p className="text-sm text-gray-500 mb-6">Visual representation of candidate strengths across required dimensions.</p>
             
@@ -245,7 +245,7 @@ function RecruiterCandidateView() {
           </div>
 
           {/* AI Synthesis */}
-          <div className="glass-card rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[#111827] shadow-xl relative overflow-hidden">
+          <div className="glass-card hover-3d rounded-3xl p-6 md:p-8 border border-gray-200 dark:border-white/5 bg-white dark:bg-[var(--surface)] shadow-xl relative overflow-hidden">
             <h2 className="text-xl font-bold mb-6 flex items-center gap-2 text-gray-900 dark:text-white"><BrainCircuit className="w-5 h-5 text-primary"/> AI Synthesis</h2>
             
             {data.report ? (

@@ -92,7 +92,7 @@ END:VCALENDAR`;
       </div>
 
       {interviews.length === 0 ? (
-        <div className="glass-card rounded-3xl p-16 text-center border-dashed border-2 border-gray-200 dark:border-white/10 relative overflow-hidden">
+        <div className="glass-card hover-3d rounded-3xl p-16 text-center border-dashed border-2 border-gray-200 dark:border-white/10 relative overflow-hidden">
           <div className="w-24 h-24 bg-gray-100 dark:bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
             <Calendar className="w-10 h-10 text-gray-400" />
           </div>
@@ -108,7 +108,7 @@ END:VCALENDAR`;
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95 }}
-                className="glass-card p-6 md:p-8 rounded-3xl group hover:shadow-2xl transition-all relative overflow-hidden border border-gray-200 dark:border-white/5 bg-white/50 dark:bg-[#0A0D14]/80"
+                className="glass-card hover-3d p-6 md:p-8 rounded-3xl group hover:shadow-2xl transition-all relative overflow-hidden border border-gray-200 dark:border-white/5 bg-white/50 dark:bg-[#0A0D14]/80"
               >
                 <div className={`absolute top-0 right-0 w-64 h-64 rounded-full blur-[80px] pointer-events-none transition-all ${
                   interview.status === 'Confirmed' ? 'bg-emerald-500/5 group-hover:bg-emerald-500/10' :
@@ -138,7 +138,7 @@ END:VCALENDAR`;
                     </div>
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[#111827] rounded-xl border border-gray-100 dark:border-white/5">
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[var(--surface)] rounded-xl border border-gray-100 dark:border-white/5">
                         <div className="w-10 h-10 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0">
                           <Clock className="w-5 h-5" />
                         </div>
@@ -150,7 +150,7 @@ END:VCALENDAR`;
                         </div>
                       </div>
                       
-                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[#111827] rounded-xl border border-gray-100 dark:border-white/5">
+                      <div className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[var(--surface)] rounded-xl border border-gray-100 dark:border-white/5">
                         <div className="w-10 h-10 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center shrink-0">
                           {interview.meeting_mode.toLowerCase().includes('video') ? <Video className="w-5 h-5" /> : <MapPin className="w-5 h-5" />}
                         </div>
@@ -186,7 +186,7 @@ END:VCALENDAR`;
                         href={interview.meeting_link} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="w-full btn-premium py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+                        className="w-full btn-premium btn-3d py-3.5 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
                       >
                         <Video className="w-5 h-5" /> Join Meeting
                       </a>
@@ -195,7 +195,7 @@ END:VCALENDAR`;
                     {interview.status !== 'Cancelled' && (
                       <button 
                         onClick={() => generateICS(interview)}
-                        className="w-full px-4 py-3 bg-white dark:bg-[#111827] border border-gray-200 dark:border-white/10 hover:border-primary/50 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-colors"
+                        className="w-full px-4 py-3 bg-white dark:bg-[var(--surface)] border border-gray-200 dark:border-white/10 hover:border-primary/50 text-gray-700 dark:text-gray-300 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition-colors"
                       >
                         <Download className="w-4 h-4" /> Add to Calendar
                       </button>
