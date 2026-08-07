@@ -1,366 +1,98 @@
-# 🚀 HireMind AI
+# HireMind AI 🚀
 
-<div align="center">
+HireMind AI is an advanced, AI-powered recruitment and interview platform designed to seamlessly connect candidates with next-generation hiring processes. The platform features an interactive Candidate Dashboard, an AI-driven Interview Studio, and a real-time Coding Environment with automated code reviews.
 
-![HireMind AI](https://img.shields.io/badge/HireMind-AI-orange?style=for-the-badge)
+## 🌟 Key Features
 
-![React](https://img.shields.io/badge/React-19-blue?logo=react)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green?logo=fastapi)
-![Python](https://img.shields.io/badge/Python-3.12-yellow?logo=python)
-![Groq](https://img.shields.io/badge/Groq-LLM-orange)
-![SQLite](https://img.shields.io/badge/SQLite-Database-blue)
-![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-3.x-38B2AC?logo=tailwindcss)
-![License](https://img.shields.io/badge/License-MIT-success)
+- **Candidate Dashboard:** A sleek, premium dashboard featuring dynamic 3D hover animations, readiness distribution charts, and upcoming interview event tracking.
+- **AI-Powered Coding Rounds:** A fully integrated coding environment where candidates can write and execute code. Submissions are instantly evaluated by our AI engine (powered by Groq) for correctness, time/space complexity, and code quality.
+- **Interview Studio:** An intelligent, simulated interview experience where candidates receive personalized technical questions based on their resume and job profile.
+- **Modern UI/UX:** Built with a sophisticated light-gray design language, featuring glassmorphism effects, smooth transitions (via Framer Motion), and responsive layouts.
 
-### 🧠 AI-Powered Recruitment Platform
+## 🛠️ Tech Stack
 
-*Resume Analysis • AI Interviews • Coding Assessment • Learning Roadmaps • Recruiter Dashboard • AI Copilot*
+### Frontend
+- **Framework:** React + Vite
+- **Styling:** Tailwind CSS (v4)
+- **Animations:** Framer Motion
+- **Icons:** Lucide React
+- **HTTP Client:** Axios
 
-</div>
+### Backend
+- **Framework:** FastAPI (Python)
+- **Database:** SQLite (managed via SQLAlchemy ORM)
+- **Validation:** Pydantic
+- **Server:** Uvicorn
+- **AI Integration:** Groq API (for automated code review & interview intelligence)
 
----
+## 🚀 Getting Started
 
-# 📌 Overview
+### Prerequisites
+- Node.js (v18+)
+- Python (3.10+)
 
-**HireMind AI** is a modern AI-powered recruitment platform that helps candidates prepare for jobs while enabling recruiters to evaluate applicants efficiently.
+### 1. Backend Setup
 
-The platform combines **Artificial Intelligence**, **Resume Analysis**, **Mock Interviews**, **Coding Assessments**, **Learning Roadmaps**, and **Analytics** into one intelligent hiring ecosystem.
-
----
-
-# ✨ Features
-
-## 👨‍💻 Candidate Module
-
-- ✅ AI Resume Analyzer
-- ✅ ATS Score Calculation
-- ✅ Resume Feedback
-- ✅ AI Mock Interview
-- ✅ Speech Recognition
-- ✅ AI Voice Responses
-- ✅ Coding Assessment
-- ✅ Personalized Learning Roadmap
-- ✅ AI Career Copilot
-- ✅ Performance Dashboard
-- ✅ Progress Tracking
-
----
-
-## 🏢 Recruiter Module
-
-- Candidate Dashboard
-- Recruiter Dashboard
-- Candidate Pipeline
-- AI Hiring Reports
-- Interview Scheduling
-- Analytics Dashboard
-- Candidate Evaluation
-- Resume Screening
-- Notification System
-
----
-
-## 🤖 AI Features
-
-- Groq LLM Integration
-- Resume Parsing
-- AI Resume Suggestions
-- AI Interview Questions
-- AI Interview Evaluation
-- AI Learning Recommendations
-- AI Career Guidance
-- AI Coding Review
-
----
-
-# 🛠 Tech Stack
-
-## Frontend
-
-- React.js
-- Vite
-- Tailwind CSS
-- Framer Motion
-- Recharts
-- React Router
-- Axios
-
----
-
-## Backend
-
-- FastAPI
-- Python
-- SQLAlchemy
-- Pydantic
-- JWT Authentication
-
----
-
-## Database
-
-- SQLite
-- PostgreSQL (Production Ready)
-
----
-
-## AI
-
-- Groq API
-- Large Language Models (LLMs)
-
----
-
-## Tools
-
-- Git
-- GitHub
-- Docker
-- VS Code
-- Postman
-
----
-
-# 📂 Project Structure
-
+Navigate to the backend directory and install the dependencies:
 ```bash
+cd backend
+python -m venv venv
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+Start the backend server:
+```bash
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --reload
+```
+The backend API will run at `http://localhost:8000`.
+
+### 2. Frontend Setup
+
+Navigate to the frontend directory and install dependencies:
+```bash
+cd frontend
+npm install
+```
+
+Start the frontend development server:
+```bash
+npm run dev
+```
+The web application will run at `http://localhost:5173`.
+
+## 📂 Project Structure
+
+```
 HireMind-AI/
-│
 ├── backend/
 │   ├── app/
-│   ├── api/
-│   ├── models/
-│   ├── services/
-│   ├── schemas/
-│   └── main.py
+│   │   ├── api/          # API Controllers (coding, auth, etc.)
+│   │   ├── models.py     # SQLAlchemy DB Models
+│   │   ├── schemas.py    # Pydantic Schemas
+│   │   ├── services/     # Core Business Logic (coding_service, llm_service)
+│   │   └── main.py       # FastAPI Application Entry Point
+│   ├── requirements.txt
+│   └── hiremind.db       # SQLite Database
 │
 ├── frontend/
 │   ├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── layouts/
-│   ├── assets/
-│   └── App.jsx
+│   │   ├── components/   # Reusable UI Components & Layouts
+│   │   ├── pages/        # Application Pages (CandidateDashboard, CodingDashboard)
+│   │   ├── index.css     # Global Tailwind CSS Styles
+│   │   └── App.jsx       # React Router Configuration
+│   ├── package.json
+│   └── vite.config.js
 │
-├── screenshots/
-├── README.md
-└── requirements.txt
+└── README.md
 ```
 
----
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
 
-# ⚙ Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/rajnarharia/HireMind-AI.git
-
-cd HireMind-AI
-```
-
----
-
-## Backend Setup
-
-```bash
-cd backend
-
-python -m venv venv
-
-source venv/bin/activate
-
-# Windows
-venv\Scripts\activate
-
-pip install -r requirements.txt
-
-uvicorn app.main:app --reload
-```
-
----
-
-## Frontend Setup
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
-
----
-
-# 🔑 Environment Variables
-
-Create a `.env` file inside the backend folder.
-
-```env
-GROQ_API_KEY=YOUR_GROQ_API_KEY
-
-JWT_SECRET_KEY=YOUR_SECRET_KEY
-
-DATABASE_URL=sqlite:///./hiremind.db
-```
-
----
-
-# 📊 Modules
-
-### 📄 Resume Analyzer
-
-- Upload Resume
-- ATS Score
-- AI Suggestions
-- Resume Summary
-- Skill Extraction
-
----
-
-### 🎤 AI Interview
-
-- AI Questions
-- Voice Interview
-- Speech Recognition
-- AI Evaluation
-- Confidence Score
-
----
-
-### 💻 Coding Platform
-
-- Python Support
-- Code Runner
-- Test Cases
-- Hidden Test Cases
-- AI Code Review
-
----
-
-### 📈 Dashboard
-
-- Resume Match
-- Coding Score
-- Interview Score
-- AI Readiness
-- Performance Analytics
-
----
-
-### 🤖 AI Copilot
-
-- Career Guidance
-- Resume Tips
-- Coding Help
-- Interview Tips
-- Learning Suggestions
-
----
-
-# 📷 Screenshots
-
-Add screenshots here.
-
-```
-screenshots/
-
-dashboard.png
-
-resume.png
-
-interview.png
-
-coding.png
-
-reports.png
-
-copilot.png
-```
-
----
-
-# 🚀 Future Improvements
-
-- Video Interview
-- AI Facial Emotion Analysis
-- Live Coding Collaboration
-- Company Portal
-- Email Notifications
-- PostgreSQL Migration
-- Docker Deployment
-- Kubernetes Support
-- CI/CD Pipeline
-
----
-
-# 📈 Roadmap
-
-- [x] Resume Analyzer
-- [x] AI Interview
-- [x] Coding Assessment
-- [x] Learning Roadmap
-- [x] Recruiter Dashboard
-- [x] AI Copilot
-- [ ] Docker Deployment
-- [ ] PostgreSQL
-- [ ] Cloud Deployment
-- [ ] Mobile Application
-
----
-
-# 🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository
-
-2. Create a feature branch
-
-```bash
-git checkout -b feature-name
-```
-
-3. Commit changes
-
-```bash
-git commit -m "Added new feature"
-```
-
-4. Push branch
-
-```bash
-git push origin feature-name
-```
-
-5. Open a Pull Request
-
----
-
-# 📜 License
-
+## 📝 License
 This project is licensed under the MIT License.
-
----
-
-# 👨‍💻 Author
-
-**Raj Narharia**
-
-🎓 B.Tech Artificial Intelligence
-
-📍 Rajasthan, India
-
-🔗 GitHub
-
-https://github.com/rajnarharia
-
----
-
-<div align="center">
-
-### ⭐ If you like this project, don't forget to Star the repository ⭐
-
-Made with ❤️ by Raj Narharia
-
-</div>
