@@ -246,10 +246,10 @@ function Dashboard() {
           </motion.div>
 
           {/* Skills Horizontal Bars & Weekly Progress */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+            <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full">
               <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Skill Proficiency</h2>
-              <div className="space-y-5">
+              <div className="space-y-5 flex-1 flex flex-col justify-center">
                 {data?.charts?.skills?.map((skill, i) => (
                   <div key={i}>
                     <div className="flex justify-between text-xs font-bold mb-2">
@@ -272,21 +272,21 @@ function Dashboard() {
               </div>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm flex flex-col justify-between">
+            <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex flex-col h-full justify-between">
               <div>
                 <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 uppercase tracking-wider text-gray-400">Weekly Progress</h2>
                 <div className="flex items-center justify-center mb-6">
                   <div className="relative">
-                    <CircularProgress value={data?.roadmap_progress || 0} color="text-primary" size={120} strokeWidth={8} />
+                    <CircularProgress value={data?.roadmap_progress || 0} color="text-primary" size={120} strokeWidth={8} textSize="text-2xl" />
                   </div>
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl text-center">
+              <div className="grid grid-cols-2 gap-4 mt-auto">
+                <div className="bg-gray-50 dark:bg-white/5 p-4 rounded-xl text-center border border-gray-100 dark:border-white/5 shadow-sm hover-3d">
                   <div className="text-2xl font-black text-gray-900 dark:text-white">{data?.profile?.xp || 0}</div>
                   <div className="text-xs font-bold text-gray-500 uppercase">Total XP</div>
                 </div>
-                <div className="bg-orange-50 dark:bg-orange-500/10 p-4 rounded-xl text-center border border-orange-100 dark:border-orange-500/20">
+                <div className="bg-orange-50 dark:bg-orange-500/10 p-4 rounded-xl text-center border border-orange-200 dark:border-orange-500/20 shadow-sm hover-3d">
                   <div className="text-2xl font-black text-orange-600 dark:text-orange-400">{data?.profile?.streak || 0}</div>
                   <div className="text-xs font-bold text-orange-500 uppercase">Day Streak</div>
                 </div>
@@ -297,48 +297,45 @@ function Dashboard() {
         </div>
 
         {/* Right Column (Activity, Copilot, Upcoming) */}
-        <div className="space-y-6">
+        <div className="flex flex-col gap-6">
           
           <motion.div variants={itemVariants} className="bg-gradient-to-b from-primary to-secondary rounded-[16px] p-6 text-white shadow-lg shadow-primary/20 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-[40px] group-hover:bg-white/20 transition-all pointer-events-none"></div>
-            <div className="flex items-center gap-3 mb-4 relative z-10">
-              <div className="p-2 bg-white/10 rounded-xl backdrop-blur-sm"><Bot className="w-5 h-5 text-white" /></div>
-              <h2 className="text-lg font-bold">AI Copilot</h2>
+            
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-white/20 rounded-xl backdrop-blur-sm">
+                <Sparkles className="w-5 h-5 text-white" />
+              </div>
+              <h2 className="text-lg font-bold">Copilot Insights</h2>
             </div>
-            <div className="bg-black/20 rounded-xl p-4 backdrop-blur-sm border border-white/10 relative z-10 mb-4">
-               <motion.div 
-                 initial={{ opacity: 0 }}
-                 animate={{ opacity: 1 }}
-                 transition={{ repeat: Infinity, duration: 2, repeatType: "reverse" }}
-                 className="text-xs font-medium text-white/80"
-               >
-                 "Your coding score increased by 12% this week. Want to try a mock interview for Amazon?"
-               </motion.div>
-            </div>
-            <button onClick={() => navigate('/dashboard/copilot')} className="w-full py-2.5 bg-white text-primary font-bold rounded-xl shadow-md hover:bg-gray-50 transition-colors flex items-center justify-center gap-2 relative z-10 text-sm">
-              Launch Copilot <ArrowRight className="w-4 h-4" />
+            
+            <p className="text-sm text-white/90 leading-relaxed mb-6">
+              "Your Python skills are in the top 10% this week. Consider taking a mock interview for Senior Backend roles to unlock more opportunities."
+            </p>
+            
+            <button onClick={() => navigate('/dashboard/copilot')} className="w-full py-3 bg-white text-primary text-sm font-bold rounded-xl hover:bg-gray-50 transition-colors flex items-center justify-center gap-2">
+              <Bot className="w-4 h-4"/> Chat with Copilot
             </button>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
+          <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
             <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6 flex items-center justify-between">
               <span>Upcoming Events</span>
               <Calendar className="w-4 h-4 text-gray-400" />
             </h2>
             <div className="text-center py-6 bg-gray-50 dark:bg-white/5 rounded-xl border border-dashed border-gray-200 dark:border-white/10">
-              <Calendar className="w-8 h-8 text-gray-300 mx-auto mb-2" />
-              <p className="text-xs font-medium text-gray-500">No upcoming interviews scheduled.</p>
-              <button onClick={() => navigate('/dashboard/schedule')} className="mt-3 text-xs font-bold text-primary hover:underline">Schedule one now</button>
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">No upcoming interviews.</p>
+              <button className="mt-3 text-primary text-sm font-bold hover:underline">Schedule one</button>
             </div>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="bg-white dark:bg-[#111827] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm">
+          <motion.div variants={itemVariants} className="bg-white dark:bg-[var(--surface)] rounded-[16px] p-6 border border-gray-200 dark:border-white/5 shadow-sm hover-3d flex-1 flex flex-col">
             <h2 className="text-sm font-bold text-gray-900 dark:text-white mb-6">Activity Timeline</h2>
             
-            <div className="space-y-6 relative before:absolute before:inset-0 before:ml-3.5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-100 dark:before:bg-white/10">
+            <div className="space-y-6 relative before:absolute before:inset-0 before:ml-3.5 before:-translate-x-px before:h-full before:w-0.5 before:bg-gray-200 dark:before:bg-white/10">
               {data?.recent_activity?.filter(a => a.date).sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,4).map((act, i) => (
                 <div key={i} className="relative flex items-start gap-4">
-                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border-2 z-10 bg-white dark:bg-[#111827] ${
+                  <div className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 border-2 z-10 bg-white dark:bg-[var(--surface)] ${
                     act.type.includes('Resume') ? 'border-blue-500 text-blue-500' : 
                     act.type.includes('Interview') ? 'border-purple-500 text-purple-500' :
                     act.type.includes('Coding') ? 'border-emerald-500 text-emerald-500' :

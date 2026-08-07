@@ -21,6 +21,7 @@ function CodingDashboard() {
   
   const [isLoading, setIsLoading] = useState(true);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [startingResumeId, setStartingResumeId] = useState(null);
   const [code, setCode] = useState("// Write your code here...");
   const [language, setLanguage] = useState("python");
   const [output, setOutput] = useState(null);
@@ -40,7 +41,7 @@ function CodingDashboard() {
   }
 
   async function startRound(resumeId) {
-    setIsProcessing(true);
+    setStartingResumeId(resumeId);
     try {
       const res = await api.post('/coding/start', {
         resume_id: resumeId,
@@ -109,7 +110,7 @@ public class main {
     } catch (err) {
       console.error(err);
     } finally {
-      setIsProcessing(false);
+      setStartingResumeId(null);
     }
   }
 
@@ -231,10 +232,10 @@ public class main {
                     </div>
                     <button
                       onClick={() => startRound(resume.id)}
-                      disabled={isProcessing}
+                      disabled={startingResumeId !== null}
                       className="btn-premium px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 disabled:opacity-50"
                     >
-                      {isProcessing ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4 fill-current" />} Start
+                      {startingResumeId === resume.id ? <Loader2 className="w-4 h-4 animate-spin" /> : <Play className="w-4 h-4 fill-current" />} Start
                     </button>
                   </div>
                 ))
